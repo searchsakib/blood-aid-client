@@ -25,14 +25,10 @@ const Footer = () => {
               </h3>
               <ul className="space-y-2">
                 <li>
-                  <a rel="noopener noreferrer" href="#">
-                    Privacy
-                  </a>
+                  <Link to="/blog">Blog</Link>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">
-                    Terms of Service
-                  </a>
+                  <Link to="/donation-requests">Donation Requests</Link>
                 </li>
                 <li>
                   <a rel="noopener noreferrer" href="#">
