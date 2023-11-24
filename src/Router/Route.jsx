@@ -8,6 +8,7 @@ import Blog from '../pages/Blog/Blog';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import Fundings from '../pages/Fundings/Fundings';
 import Register from '../pages/Register/Register';
+import SearchPage from '../pages/SearchPage/SearchPage';
 
 const myRoute = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const myRoute = createBrowserRouter([
       {
         path: '/login',
         element: <Login></Login>,
+      },
+      {
+        path: '/search-page',
+        element: <SearchPage></SearchPage>,
       },
     ],
   },

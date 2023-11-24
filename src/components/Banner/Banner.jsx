@@ -29,6 +29,7 @@ const Banner = () => {
                 Join as a donor
               </Link>
               <Link
+                to="/search-page"
                 rel="noopener noreferrer"
                 className="px-8 py-3 text-lg font-semibold border rounded text-white dark:border-gray-100 hover:text-red-600 hover:border-red-600 hover:bg-white transition-colors duration-300 ease-in-out"
               >
