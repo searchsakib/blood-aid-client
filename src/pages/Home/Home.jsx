@@ -1,10 +1,10 @@
 import { Helmet } from 'react-helmet-async';
 import Banner from '../../components/Banner/Banner';
-import Services from '../../components/Services/Services';
 import ContactUs from '../../components/ContactUs/ContactUs';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
+import Featured from '../../components/Featured/Featured';
 
 const Home = () => {
   // for aos
@@ -19,7 +19,7 @@ const Home = () => {
       </Helmet>
       <Banner></Banner>
       <div className="pb-[100px] pt-[100px]" data-aos="fade-right">
-        <Services></Services>
+        <Featured></Featured>
       </div>
       <div data-aos="fade-left">
         <ContactUs></ContactUs>

@@ -30,27 +30,22 @@ const Footer = () => {
                 <li>
                   <Link to="/donation-requests">Donation Requests</Link>
                 </li>
-                <li>
-                  <a rel="noopener noreferrer" href="#">
-                    FAQ
-                  </a>
-                </li>
               </ul>
             </div>
             <div className="space-y-3">
               <h3 className="uppercase text-white font-medium">Address</h3>
               <ul className="space-y-2">
                 <li>
-                  <a rel="noopener noreferrer" href="#">
+                  <p rel="noopener noreferrer" href="#">
                     54, Nazrul Avenue,
                     <br /> Karwan Bazar,
-                  </a>
+                  </p>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">
+                  <p rel="noopener noreferrer" href="#">
                     Dhaka 1215,
                     <br /> Bangladesh
-                  </a>
+                  </p>
                 </li>
               </ul>
             </div>
