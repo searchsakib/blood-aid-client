@@ -110,7 +110,7 @@ const NavBar = () => {
   );
 
   return (
-    <div className="flex flex-row-reverse xl:flex-row px-3 md:px-5 items-center justify-between max-w-screen-2xl mx-auto py-10">
+    <div className="flex flex-row-reverse xl:flex-row px-3 md:px-6 items-center justify-between max-w-screen-2xl mx-auto py-10">
       <div>
         <Link>
           <div className="flex items-center justify-center">
