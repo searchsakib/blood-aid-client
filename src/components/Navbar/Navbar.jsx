@@ -12,7 +12,7 @@ const NavBar = () => {
             isPending
               ? 'pending'
               : isActive
-              ? 'text-green-300 underline font-semibold'
+              ? 'text-green-300  font-semibold underline decoration-2'
               : ''
           }
         >
@@ -27,7 +27,7 @@ const NavBar = () => {
             isPending
               ? 'pending'
               : isActive
-              ? 'text-green-300 underline font-semibold'
+              ? 'text-green-300 underline font-semibold decoration-2'
               : ''
           }
         >
@@ -42,7 +42,7 @@ const NavBar = () => {
             isPending
               ? 'pending'
               : isActive
-              ? 'text-green-300 underline font-semibold'
+              ? 'text-green-300 underline font-semibold decoration-2'
               : ''
           }
         >
@@ -56,7 +56,7 @@ const NavBar = () => {
             isPending
               ? 'pending'
               : isActive
-              ? 'text-green-300 underline font-semibold'
+              ? 'text-green-300 underline font-semibold decoration-2'
               : ''
           }
         >
@@ -70,7 +70,7 @@ const NavBar = () => {
             isPending
               ? 'pending'
               : isActive
-              ? 'text-green-300 underline font-semibold'
+              ? 'text-green-300 underline font-semibold decoration-2'
               : ''
           }
         >
@@ -84,7 +84,7 @@ const NavBar = () => {
             isPending
               ? 'pending'
               : isActive
-              ? 'text-green-300 underline font-semibold'
+              ? 'text-green-300 underline font-semibold decoration-2'
               : ''
           }
         >
@@ -99,7 +99,7 @@ const NavBar = () => {
             isPending
               ? 'pending'
               : isActive
-              ? 'text-green-300 underline font-semibold'
+              ? 'text-green-300 underline font-semibold decoration-2'
               : ''
           }
         >
@@ -123,7 +123,7 @@ const NavBar = () => {
           </div>
         </Link>
       </div>
-      <div className="dropdown bg-white rounded-lg">
+      <div className="dropdown bg-white rounded">
         <label tabIndex={0} className="btn btn-ghost xl:hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -136,7 +136,7 @@ const NavBar = () => {
         </label>
         <ul
           tabIndex={0}
-          className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow  rounded-box w-52 text-white bg-red-500"
+          className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded w-52 text-white bg-red-500"
         >
           {links}
           <div className="flex flex-col  items-center justify-center gap-3">
@@ -148,7 +148,7 @@ const NavBar = () => {
             {/* {name && <p> {name} </p>} */}
 
             <Link to="/login">
-              <button className="btn text-xs btn-sm">Login</button>
+              <button className="btn text-xs btn-sm rounded">Login</button>
             </Link>
           </div>
         </ul>
@@ -169,7 +169,7 @@ const NavBar = () => {
         {/* {name && <p> {name} </p>} */}
 
         <Link to="/login">
-          <button className="btn text-xs">Login</button>
+          <button className="btn text-xs rounded">Login</button>
         </Link>
       </div>
     </div>
