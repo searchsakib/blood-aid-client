@@ -92,7 +92,7 @@ const NavBar = () => {
         </NavLink>
       </li>
 
-      <li className="text-base pb-8 md:pb-0 lg:pb-0">
+      <li className="text-base md:pr-6 lg:pr-6 pb-8 md:pb-0 lg:pb-0">
         <NavLink
           to="/register"
           className={({ isActive, isPending }) =>
