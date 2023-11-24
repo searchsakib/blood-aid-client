@@ -51,7 +51,7 @@ const ContactUs = () => {
           </div>
           <form className="flex flex-col py-6 space-y-6 md:py-0 md:px-6 text-black">
             <label className="block">
-              <span className="mb-1">Full name</span>
+              <span className="mb-1 font-medium">Full name</span>
               <input
                 type="text"
                 placeholder="name"
@@ -59,7 +59,7 @@ const ContactUs = () => {
               />
             </label>
             <label className="block">
-              <span className="mb-1">Email address</span>
+              <span className="mb-1 font-medium">Email address</span>
               <input
                 type="email"
                 placeholder="email"
@@ -67,7 +67,7 @@ const ContactUs = () => {
               />
             </label>
             <label className="block">
-              <span className="mb-1">Message</span>
+              <span className="mb-1 font-medium">Message</span>
               <textarea
                 rows="3"
                 className="block w-full rounded-md focus:ring pt-3 pb-20 bg-white px-3"
@@ -75,7 +75,8 @@ const ContactUs = () => {
             </label>
             <button
               type="button"
-              className="self-center px-8 py-2 text-lg font-semibold rounded outline focus:ring text-red-600 hover:text-white hover:bg-red-600 hover:outline-red-600 transition-colors duration-300 ease-in-out"
+              className="self-center px-8 py-2 text-lg font-semibold rounded outline outline-2 outline-black text-black focus:ring hover:text-red-600
+              hover:bg-white hover:outline-red-600 transition-colors duration-200 ease-in-out"
             >
               Submit
             </button>

@@ -5,6 +5,7 @@ import { FaHandsHelping } from 'react-icons/fa';
 const Featured = () => {
   return (
     <div className="max-w-screen-xl mx-auto px-3 md:px-6">
+      {/* bg-[#FFEBEE] */}
       <section className="py-6 text-black bg-gray-100">
         <div className="container mx-auto p-4 my-6 space-y-2 text-center">
           <h2 className="text-4xl font-bold">How it Works?</h2>
