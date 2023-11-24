@@ -10,7 +10,7 @@ const Footer = () => {
             <Link>
               <div className="flex items-center justify-center">
                 <div className="flex items-center">
-                  <img className="max-w-[70px] " src={logo} alt="" />{' '}
+                  <img className="max-w-[45px]" src={logo} alt="" />{' '}
                 </div>
                 <div className="font-bold  text-2xl p-2 text-white rounded-sm flex items-center">
                   BloodAid
