@@ -15,6 +15,10 @@ const Register = () => {
   const [upazila, setUpazila] = useState();
   const [upazilas, setUpazilas] = useState([]);
 
+  // state for password validation
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
   //for district and upazilla Errors
   const [disError, setDisError] = useState('');
   const [upazilaError, setUpazilaError] = useState('');
@@ -29,10 +33,25 @@ const Register = () => {
     const name = form.get('name');
     const photo = form.get('photo');
     const email = form.get('email');
+    const blood = form.get('blood');
+    const district = form.get('district');
+    const upazila = form.get('upazila');
     const password = form.get('password');
+    const confirmPassword = form.get('confirmPassword');
+    const status = 'active';
 
-    const registeredUserData = { name, photo, email, password };
-    console.log(registeredUserData);
+    const registeredUserData = {
+      name,
+      photo,
+      email,
+      blood,
+      district,
+      upazila,
+      password,
+      confirmPassword,
+      status,
+    };
+    console.log('New User', registeredUserData);
 
     setRegError('');
 
@@ -41,6 +60,7 @@ const Register = () => {
     upazila ? setUpazilaError('') : setUpazilaError('Please choose upazila');
     if (!district || !upazila) return;
 
+    // regex validation
     if (password.length < 6) {
       setRegError('Password should be at least 6 characters or longer');
       return;
@@ -51,6 +71,10 @@ const Register = () => {
       return;
     } else if (!/[#?!@$%^&*-]/.test(password)) {
       setRegError('Your password should have at least one special characters');
+      return;
+    } else if (password !== confirmPassword) {
+      // check if passwords match
+      setRegError('Passwords do not match');
       return;
     }
 
@@ -238,10 +262,30 @@ const Register = () => {
                   type="password"
                   placeholder="password"
                   name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="input input-bordered rounded-none"
                   required
                 />
               </div>
+
+              {/* confirm password starts */}
+              <div className="form-control">
+                <label className="label font-medium text-base">
+                  <span className="label-text">Confirm Password</span>
+                </label>
+                <input
+                  type="password"
+                  placeholder="confirm password"
+                  name="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="input input-bordered rounded-none"
+                  required
+                />
+              </div>
+              {/* confirm password ends */}
+
               <div className="form-control mt-6">
                 <button className="btn bg-[#05386B] text-white hover:text-[#05386B]  hover:bg-blue-50 hover:border-2 hover:border-[#05386B] rounded-none">
                   Register
