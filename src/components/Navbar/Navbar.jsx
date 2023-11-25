@@ -77,7 +77,7 @@ const NavBar = () => {
           Fundings
         </NavLink>
       </li>
-      <li className="text-base md:pr-12 lg:pr-12 pb-4 md:pb-0 lg:pb-0">
+      {/* <li className="text-base md:pr-12 lg:pr-12 pb-4 md:pb-0 lg:pb-0">
         <NavLink
           to="/login"
           className={({ isActive, isPending }) =>
@@ -90,7 +90,7 @@ const NavBar = () => {
         >
           Login
         </NavLink>
-      </li>
+      </li> */}
 
       <li className="text-base md:pr-6 lg:pr-6 pb-8 md:pb-0 lg:pb-0">
         <NavLink
