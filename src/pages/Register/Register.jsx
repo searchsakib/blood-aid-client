@@ -95,171 +95,177 @@ const Register = () => {
   }, [upazila]);
 
   return (
-    <div className="max-w-screen-xl mx-auto px-3 md:px-6 2xl:px-0">
-      <Helmet>
-        <title>Blood Aid | Register</title>
-      </Helmet>
+    <div className="bg-gray-100">
+      <div className="max-w-screen-xl mx-auto px-3 md:px-6 2xl:px-0">
+        <Helmet>
+          <title>Blood Aid | Register</title>
+        </Helmet>
 
-      <div className="pt-[60px] pb-[76px] overflow-x-hidden">
-        <div className="mx-auto w-5/12 min-w-fit ">
-          <h2 className="text-3xl font-medium mt-0 mb-14 text-center uppercase">
-            Register Here
-          </h2>
-          {regError && (
-            <div className="text-red-600 text-center text-xl max-w-[540px] mx-auto pb-10">
-              <p> {regError} </p>
-            </div>
-          )}
+        <div className="pt-[40px] pb-[40px] overflow-x-hidden">
+          <div className="mx-auto w-5/12 min-w-fit ">
+            <h2 className="text-3xl font-medium mt-0 text-center uppercase">
+              Register Here
+            </h2>
 
-          <form
-            onSubmit={handleRegister}
-            className="card-body shadow-none md:shadow-xl rounded-none bg-green-200"
-          >
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium text-base">Name</span>
-              </label>
-              <input
-                type="text"
-                placeholder="name"
-                name="name"
-                className="input input-bordered rounded-none"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium text-base">
-                  Photo URL
-                </span>
-              </label>
-              <input
-                type="text"
-                placeholder="Photo URL"
-                name="photo"
-                className="input input-bordered rounded-none"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium text-base">Email</span>
-              </label>
-              <input
-                type="email"
-                placeholder="email"
-                name="email"
-                className="input input-bordered rounded-none"
-                required
-              />
-            </div>
-            {/* Blood group */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium text-base">
-                  Blood Group
-                </span>
-              </label>
-              <select
-                name="blood"
-                className="input input-bordered rounded-none"
-                required
-              >
-                <option value="">Select a Blood Group</option>
-                <option value="A+">A+</option>
-                <option value=" A-"> A-</option>
-                <option value="B+">B+</option>
-                <option value="B-">B-</option>
-                <option value="AB+">AB+</option>
-                <option value="AB-">AB-</option>
-                <option value="O+">O+</option>
-                <option value="O-">O-</option>
-              </select>
-            </div>
-            {/* Blood group End */}
+            <form
+              onSubmit={handleRegister}
+              className="card-body shadow-none rounded-none pt-2 pb-2"
+            >
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium text-base">Name</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="name"
+                  name="name"
+                  className="input input-bordered rounded-none"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium text-base">
+                    Photo URL
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Photo URL"
+                  name="photo"
+                  className="input input-bordered rounded-none"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium text-base">
+                    Email
+                  </span>
+                </label>
+                <input
+                  type="email"
+                  placeholder="email"
+                  name="email"
+                  className="input input-bordered rounded-none"
+                  required
+                />
+              </div>
+              {/* Blood group */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium text-base">
+                    Blood Group
+                  </span>
+                </label>
+                <select
+                  name="blood"
+                  className="input input-bordered rounded-none"
+                  required
+                >
+                  <option value="">Select a Blood Group</option>
+                  <option value="A+">A+</option>
+                  <option value=" A-"> A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                </select>
+              </div>
+              {/* Blood group End */}
 
-            {/* District Start */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium text-base">
-                  District
-                </span>
-              </label>
-              <select
-                name="district"
-                className="input input-bordered rounded-none"
-                onChange={(e) => setDistrict(e.target.value)}
-                required
-              >
-                <option value="">Select District</option>
-                {Object.keys(cities)
-                  .sort()
-                  .map((city) => {
+              {/* District Start */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium text-base">
+                    District
+                  </span>
+                </label>
+                <select
+                  name="district"
+                  className="input input-bordered rounded-none"
+                  onChange={(e) => setDistrict(e.target.value)}
+                  required
+                >
+                  <option value="">Select District</option>
+                  {Object.keys(cities)
+                    .sort()
+                    .map((city) => {
+                      return (
+                        <option key={city} value={city}>
+                          {city}
+                        </option>
+                      );
+                    })}
+                </select>
+                <p className=" mt-1 text-sm text-red-500">{disError}</p>
+              </div>
+              {/* District End */}
+
+              {/* Upazila Start */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium text-base">
+                    Upazila
+                  </span>
+                </label>
+                <select
+                  name="upazila"
+                  className="input input-bordered rounded-none"
+                  onChange={(e) => setUpazila(e.target.value)}
+                  required
+                >
+                  <option value="">Select Upazila</option>
+                  {upazilas.map((upazila) => {
                     return (
-                      <option key={city} value={city}>
-                        {city}
+                      <option key={upazila} value={upazila}>
+                        {upazila}
                       </option>
                     );
                   })}
-              </select>
-              <p className=" mt-1 text-sm text-red-500">{disError}</p>
-            </div>
-            {/* District End */}
+                </select>
+                <p className=" mt-1 text-sm text-red-500">{upazilaError}</p>
+              </div>
+              {/* Upazila End */}
 
-            {/* Upazila Start */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium text-base">
-                  Upazila
-                </span>
-              </label>
-              <select
-                name="upazila"
-                className="input input-bordered rounded-none"
-                onChange={(e) => setUpazila(e.target.value)}
-                required
+              <div className="form-control">
+                <label className="label font-medium text-base">
+                  <span className="label-text">Password</span>
+                </label>
+                <input
+                  type="password"
+                  placeholder="password"
+                  name="password"
+                  className="input input-bordered rounded-none"
+                  required
+                />
+              </div>
+              <div className="form-control mt-6">
+                <button className="btn bg-[#05386B] text-white hover:text-[#05386B]  hover:bg-blue-50 hover:border-2 hover:border-[#05386B] rounded-none">
+                  Register
+                </button>
+              </div>
+            </form>
+
+            {/* registration error  */}
+            {regError && (
+              <div className="text-red-600 text-center text-xl max-w-[540px] mx-auto py-3">
+                <p> {regError} </p>
+              </div>
+            )}
+
+            <p className="font-medium text-center text-lg mt-1">
+              Already have an account?{'   '}
+              <Link
+                to="/login"
+                className="font-semibold text-[#05386B] underline text-2xl"
               >
-                <option value="">Select Upazila</option>
-                {upazilas.map((upazila) => {
-                  return (
-                    <option key={upazila} value={upazila}>
-                      {upazila}
-                    </option>
-                  );
-                })}
-              </select>
-              <p className=" mt-1 text-sm text-red-500">{upazilaError}</p>
-            </div>
-            {/* Upazila End */}
-
-            <div className="form-control">
-              <label className="label font-medium text-base">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                type="password"
-                placeholder="password"
-                name="password"
-                className="input input-bordered rounded-none"
-                required
-              />
-            </div>
-            <div className="form-control mt-6">
-              <button className="btn bg-[#05386B] text-white hover:text-[#05386B]  hover:bg-blue-50 hover:border-2 hover:border-[#05386B] rounded-none">
-                Register
-              </button>
-            </div>
-          </form>
-
-          <p className="font-medium text-center text-lg mt-8">
-            Already have an account?{'   '}
-            <Link
-              to="/login"
-              className="font-semibold text-[#05386B] underline text-2xl"
-            >
-              Login
-            </Link>{' '}
-          </p>
+                Login
+              </Link>{' '}
+            </p>
+          </div>
         </div>
       </div>
     </div>
