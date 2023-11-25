@@ -1,8 +1,33 @@
 import { Link, NavLink } from 'react-router-dom';
 import userPic from '/images/user.png';
 import logo from '/images/logo.png';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const NavBar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const [name, setName] = useState(null);
+  const [photo, setPhoto] = useState(null);
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      if (user) {
+        setName(user.displayName);
+        setPhoto(user.photoURL);
+      }
+    }, 1100);
+
+    return () => clearTimeout(delay);
+  }, [user]);
+
+  const handleSignOut = () => {
+    setName(null);
+    setPhoto(null);
+
+    logOut().then().catch();
+  };
+
   const links = (
     <>
       <li className="text-base md:pr-12 lg:pr-12 pb-4 md:pb-0 lg:pb-0">
@@ -123,6 +148,8 @@ const NavBar = () => {
           </div>
         </Link>
       </div>
+
+      {/* Dropdown Start */}
       <div className="dropdown bg-white rounded">
         <label tabIndex={0} className="btn btn-ghost xl:hidden">
           <svg
@@ -142,17 +169,29 @@ const NavBar = () => {
           <div className="flex flex-col  items-center justify-center gap-3">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src={userPic} />
+                {photo ? <img src={photo} /> : <img src={userPic} />}
               </div>
             </label>
-            {/* {name && <p> {name} </p>} */}
+            {name && <p className="text-white"> {name} </p>}
 
-            <Link to="/login">
-              <button className="btn text-xs btn-sm rounded">Login</button>
-            </Link>
+            {user ? (
+              <button
+                onClick={handleSignOut}
+                className="btn bg-gray-100 rounded-none hover:bg-sky-200 text-black outline-none border-none"
+              >
+                Log Out
+              </button>
+            ) : (
+              <Link to="/login">
+                <button className="btn bg-gray-100 rounded-none hover:bg-sky-200 text-black outline-none border-none">
+                  Login
+                </button>
+              </Link>
+            )}
           </div>
         </ul>
       </div>
+      {/* Dropdown end */}
 
       {/* <div className="hidden xl:flex"> */}
 
@@ -163,14 +202,26 @@ const NavBar = () => {
         </div>
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
           <div className="w-10 rounded-full">
-            <img src={userPic} />
+            {photo ? <img src={photo} /> : <img src={userPic} />}
           </div>
         </label>
-        {/* {name && <p> {name} </p>} */}
+        {name && <p className="text-white"> {name} </p>}
 
-        <Link to="/login">
-          <button className="btn text-xs rounded">Login</button>
-        </Link>
+        {/* conditional rendering */}
+        {user ? (
+          <button
+            onClick={handleSignOut}
+            className="btn bg-gray-100 hover:bg-sky-200 text-black outline-none border-none rounded-none"
+          >
+            Log Out
+          </button>
+        ) : (
+          <Link to="/login">
+            <button className="btn bg-gray-100 hover:bg-sky-200 text-black outline-none border-none rounded-none">
+              Login
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );
