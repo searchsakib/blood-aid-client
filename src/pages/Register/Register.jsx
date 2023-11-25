@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
+import cities from '../../data/cities';
 
 const Register = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -124,6 +125,33 @@ const Register = () => {
                 required
               />
             </div>
+            {/* Blood group */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium text-base">
+                  Blood Group
+                </span>
+              </label>
+              <select
+                defaultValue="default"
+                name="blood"
+                className="input input-bordered rounded-none"
+                required
+              >
+                <option disabled value="default">
+                  Select a Blood Group
+                </option>
+                <option value="A+">A+</option>
+                <option value=" A-"> A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select>
+            </div>
+            {/* Blood group End */}
             <div className="form-control">
               <label className="label font-medium text-base">
                 <span className="label-text">Password</span>
