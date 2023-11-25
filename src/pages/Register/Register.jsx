@@ -20,7 +20,9 @@ const Register = () => {
     const photo = form.get('photo');
     const email = form.get('email');
     const password = form.get('password');
-    console.log(name, photo, email, password);
+
+    const registeredUserData = { name, photo, email, password };
+    console.log(registeredUserData);
 
     setRegError('');
 
