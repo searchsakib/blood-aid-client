@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 
 const DonationRequests = () => {
   return (
-    <div>
+    <div className="max-w-screen-xl mx-auto px-3 md:px-6 min-h-[80vh]">
       <Helmet>
         <title>Blood Aid | Donation Requests</title>
       </Helmet>
