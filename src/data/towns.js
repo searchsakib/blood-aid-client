@@ -1,4 +1,4 @@
-const cities = {
+const towns = {
   Barguna: [
     'Barguna Sadar',
     'Amtali',
@@ -615,4 +615,4 @@ const cities = {
   ],
 };
 
-export default cities;
+export default towns;

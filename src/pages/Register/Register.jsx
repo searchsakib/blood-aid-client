@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
-import cities from '../../data/cities';
+import towns from '../../data/towns';
 
 const Register = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -108,7 +108,7 @@ const Register = () => {
   useEffect(() => {
     if (district) {
       setDisError('');
-      setUpazilas(cities[district] || []);
+      setUpazilas(towns[district] || []);
     }
   }, [district]);
 
@@ -214,12 +214,12 @@ const Register = () => {
                   required
                 >
                   <option value="">Select District</option>
-                  {Object.keys(cities)
+                  {Object.keys(towns)
                     .sort()
-                    .map((city) => {
+                    .map((town) => {
                       return (
-                        <option key={city} value={city}>
-                          {city}
+                        <option key={town} value={town}>
+                          {town}
                         </option>
                       );
                     })}
