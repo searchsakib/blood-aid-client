@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 
 import Swal from 'sweetalert2';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 import cities from '../../data/cities';
@@ -9,6 +9,15 @@ import cities from '../../data/cities';
 const Register = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  // for district and upazilla
+  const [district, setDistrict] = useState();
+  const [upazila, setUpazila] = useState();
+  const [upazilas, setUpazilas] = useState([]);
+
+  //for district and upazilla Errors
+  const [disError, setDisError] = useState('');
+  const [upazilaError, setUpazilaError] = useState('');
 
   const [regError, setRegError] = useState('');
 
@@ -26,6 +35,11 @@ const Register = () => {
     console.log(registeredUserData);
 
     setRegError('');
+
+    // for distric and upazilla again
+    district ? setDisError('') : setDisError('Please choose district');
+    upazila ? setUpazilaError('') : setUpazilaError('Please choose upazila');
+    if (!district || !upazila) return;
 
     if (password.length < 6) {
       setRegError('Password should be at least 6 characters or longer');
@@ -65,6 +79,20 @@ const Register = () => {
         setRegError(error.message);
       });
   };
+
+  // for district upazilla once again
+  useEffect(() => {
+    if (district) {
+      setDisError('');
+      setUpazilas(cities[district] || []);
+    }
+  }, [district]);
+
+  useEffect(() => {
+    if (upazila) {
+      setUpazilaError('');
+    }
+  }, [upazila]);
 
   return (
     <div className="max-w-screen-xl mx-auto px-3 md:px-6 2xl:px-0">
@@ -133,14 +161,11 @@ const Register = () => {
                 </span>
               </label>
               <select
-                defaultValue="default"
                 name="blood"
                 className="input input-bordered rounded-none"
                 required
               >
-                <option disabled value="default">
-                  Select a Blood Group
-                </option>
+                <option value="">Select a Blood Group</option>
                 <option value="A+">A+</option>
                 <option value=" A-"> A-</option>
                 <option value="B+">B+</option>
@@ -152,6 +177,61 @@ const Register = () => {
               </select>
             </div>
             {/* Blood group End */}
+
+            {/* District Start */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium text-base">
+                  District
+                </span>
+              </label>
+              <select
+                name="district"
+                className="input input-bordered rounded-none"
+                onChange={(e) => setDistrict(e.target.value)}
+                required
+              >
+                <option value="">Select District</option>
+                {Object.keys(cities)
+                  .sort()
+                  .map((city) => {
+                    return (
+                      <option key={city} value={city}>
+                        {city}
+                      </option>
+                    );
+                  })}
+              </select>
+              <p className=" mt-1 text-sm text-red-500">{disError}</p>
+            </div>
+            {/* District End */}
+
+            {/* Upazila Start */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-medium text-base">
+                  Upazila
+                </span>
+              </label>
+              <select
+                name="upazila"
+                className="input input-bordered rounded-none"
+                onChange={(e) => setUpazila(e.target.value)}
+                required
+              >
+                <option value="">Select Upazila</option>
+                {upazilas.map((upazila) => {
+                  return (
+                    <option key={upazila} value={upazila}>
+                      {upazila}
+                    </option>
+                  );
+                })}
+              </select>
+              <p className=" mt-1 text-sm text-red-500">{upazilaError}</p>
+            </div>
+            {/* Upazila End */}
+
             <div className="form-control">
               <label className="label font-medium text-base">
                 <span className="label-text">Password</span>
