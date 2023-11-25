@@ -5,7 +5,7 @@ const Banner = () => {
   return (
     <div className="mx-auto flex flex-col-reverse lg:flex-row items-center justify-between">
       <div
-        className="hero min-h-[700px]"
+        className="hero min-h-[90vh]"
         style={{
           backgroundImage: `url(${bannerImg})`,
         }}
@@ -13,10 +13,10 @@ const Banner = () => {
         <div className="hero-overlay bg-opacity-80 bg-black"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-lg">
-            <h1 className="mb-5 text-7xl font-bold text-white">
+            <h1 className="mb-5 text-5xl md:text-7xl font-bold text-white">
               Donate Blood, Save Lives
             </h1>
-            <p className="mb-5 text-gray-200 text-lg">
+            <p className="mb-5 text-gray-200 text-base md:text-lg">
               BloodAid Connecting donors and recipients for life-saving blood
               donations. Join us in our mission to save lives.
             </p>
