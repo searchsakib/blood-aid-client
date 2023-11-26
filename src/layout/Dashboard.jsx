@@ -8,6 +8,7 @@ import {
   FaList,
   FaSearch,
   FaShoppingCart,
+  FaUser,
   FaUsers,
   FaUtensils,
 } from 'react-icons/fa';
@@ -31,15 +32,17 @@ const Dashboard = () => {
         <title>Blood Aid | Dashboard</title>
       </Helmet>
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col items-center justify-center">
+      <div className="drawer-content flex flex-col-reverse items-center justify-center bg-green-400">
         {/* Page content here */}
         {/* dashboard content */}
-        <div className="">
+
+        <div>
           <Outlet></Outlet>
         </div>
+
         <label
           htmlFor="my-drawer-2"
-          className="btn hover:bg-red-800 text-white bg-red-600 drawer-button lg:hidden"
+          className="btn hover:bg-red-800 text-white bg-red-600 drawer-button lg:hidden z-10 m-2 self-end"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +60,7 @@ const Dashboard = () => {
           </svg>
         </label>
       </div>
-      <div className="drawer-side w-8/12">
+      <div className="drawer-side">
         <label
           htmlFor="my-drawer-2"
           aria-label="close sidebar"
@@ -75,12 +78,13 @@ const Dashboard = () => {
                   Admin Home
                 </NavLink>
               </li>
-              {/* <li>
-                <NavLink to="/dashboard/addItems">
-                  <FaUtensils></FaUtensils>
-                  Add Items
+              <li>
+                <NavLink to="/dashboard/profile">
+                  <FaUser></FaUser>
+                  Admin Profile
                 </NavLink>
               </li>
+              {/* 
               <li>
                 <NavLink to="/dashboard/manageItems">
                   <FaList></FaList>
@@ -106,6 +110,12 @@ const Dashboard = () => {
                 <NavLink to="/dashboard/donner-home">
                   <FaHome></FaHome>
                   Donner Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/profile">
+                  <FaUser></FaUser>
+                  Donner Profile
                 </NavLink>
               </li>
               {/* <li>

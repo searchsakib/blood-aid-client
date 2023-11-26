@@ -12,6 +12,8 @@ import Dashboard from '../layout/Dashboard';
 import DonnerHome from '../pages/Dashboard/DonnerHome/DonnerHome';
 import AdminHome from '../pages/Dashboard/AdminHome/AdminHome';
 import DefaultView from '../pages/Dashboard/DefaultView/DefaultView';
+import Profile from '../pages/Dashboard/Profile/Profile';
+import UpdateProfile from '../pages/Dashboard/Profile/UpdateProfile';
 
 const myRoute = createBrowserRouter([
   {
@@ -62,6 +64,19 @@ const myRoute = createBrowserRouter([
       {
         index: true,
         element: <DefaultView></DefaultView>,
+      },
+
+      {
+        path: '/dashboard/profile',
+        element: <Profile></Profile>,
+        loader: () => fetch('https://blood-aid-server.vercel.app/users'),
+      },
+
+      {
+        path: '/dashboard/update-profile/:id',
+        element: <UpdateProfile></UpdateProfile>,
+        // loader: ({ params }) =>
+        //   fetch(`https://jobquest-server.vercel.app/update-job/${params.id}`),
       },
 
       //! donner (user) routes
