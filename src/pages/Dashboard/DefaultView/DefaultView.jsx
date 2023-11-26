@@ -1,9 +1,26 @@
+import useAdmin from '../../../hooks/useAdmin';
+import AdminScreen from './AdminScreen';
+import DonnerScreen from './DonnerScreen';
+import VolunteerScreen from './VolunteerScreen';
+
 const DefaultView = () => {
+  const [isAdmin] = useAdmin();
+
   return (
     <div>
-      <h2 className="bg-sky-500 text-3xl text-center mt-20">
-        Hello who are you?
-      </h2>
+      {isAdmin ? (
+        <div>
+          <AdminScreen></AdminScreen>
+        </div>
+      ) : (
+        <div className="bg-sky-300">
+          <DonnerScreen></DonnerScreen>
+        </div>
+      )}
+
+      {/* <div>
+        <VolunteerScreen></VolunteerScreen>
+      </div> */}
     </div>
   );
 };
