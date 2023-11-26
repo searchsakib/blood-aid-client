@@ -48,24 +48,24 @@ const Login = () => {
 
   return (
     <div className="bg-gray-100">
-      <div className="max-w-screen-xl min-h-screen mx-auto px-3 md:px-6 2xl:px-0">
+      <div className="max-w-screen-xl min-h-screen mx-auto px-5 md:px-6 2xl:px-0">
         <Helmet>
           <title>Blood Aid | Login</title>
         </Helmet>
         <div className="pt-[60px] pb-[76px] overflow-x-hidden">
           <div className="mx-auto w-5/12 min-w-fit ">
-            <h2 className="text-3xl font-medium mt-0 text-center uppercase">
+            <h2 className="text-3xl font-medium mt-0 mb-5 text-center uppercase">
               Login Here
             </h2>
             {logError && (
-              <div className="text-red-600 text-center text-xl max-w-[540px] mx-auto pt-10">
+              <div className="text-red-600 text-center text-xl max-w-[540px] mx-auto">
                 <p> {logError} </p>
               </div>
             )}
 
             <form
               onSubmit={handleLogin}
-              className="card-body shadow-none rounded-none"
+              className="max-w-lg shadow-none rounded-none"
             >
               <div className="form-control">
                 <label className="label">
@@ -100,7 +100,7 @@ const Login = () => {
               </div>
             </form>
 
-            <p className="font-medium text-center text-lg">
+            <p className="font-medium text-center text-lg pt-5">
               Do not have an account?{'   '}
               <Link
                 to="/register"

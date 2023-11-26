@@ -120,20 +120,20 @@ const Register = () => {
 
   return (
     <div className="bg-gray-100">
-      <div className="max-w-screen-xl mx-auto px-3 md:px-6 2xl:px-0">
+      <div className="max-w-screen-xl mx-auto px-5 md:px-6 2xl:px-0">
         <Helmet>
           <title>Blood Aid | Register</title>
         </Helmet>
 
         <div className="pt-[40px] pb-[40px] overflow-x-hidden">
           <div className="mx-auto w-5/12 min-w-fit ">
-            <h2 className="text-3xl font-medium mt-0 text-center uppercase">
+            <h2 className="text-3xl font-medium mt-3 text-center uppercase">
               Register Here
             </h2>
 
             <form
               onSubmit={handleRegister}
-              className="card-body shadow-none rounded-none pt-2 pb-2"
+              className="max-w-lg shadow-none rounded-none pt-4 pb-2"
             >
               <div className="form-control">
                 <label className="label">
