@@ -6,9 +6,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import towns from '../../data/towns';
 import useAuth from '../../hooks/useAuth';
 import { imageUpload } from '../../api/utils';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
   // for district and upazilla
@@ -48,17 +50,19 @@ const Register = () => {
     const password = form.get('password');
     const confirmPassword = form.get('confirmPassword');
     const status = 'active';
+    const role = 'donner';
 
     const registeredUserData = {
       name,
-      photo,
+      // photo,
       email,
       blood,
       district,
       upazila,
-      password,
-      confirmPassword,
+      // password,
+      // confirmPassword,
       status,
+      role,
     };
     console.log('New User', registeredUserData);
 
@@ -101,8 +105,10 @@ const Register = () => {
         updateUserProfile(name, photo?.data?.display_url)
           .then((res) => {
             console.log('profile updated', res);
+            axiosPublic
+              .post('/users', registeredUserData)
+              .then((res) => console.log(res.data));
           })
-
           .catch((err) => {
             console.log(err);
           });

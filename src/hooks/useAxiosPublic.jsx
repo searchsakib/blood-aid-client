@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosPublic = axios.create({
-  baseURL: 'https://blood-aid-server.vercel.app/',
+  baseURL: 'https://blood-aid-server.vercel.app',
 });
 
 const useAxiosPublic = () => {
