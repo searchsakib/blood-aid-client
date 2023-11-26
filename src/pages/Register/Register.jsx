@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import towns from '../../data/towns';
 import useAuth from '../../hooks/useAuth';
+import { imageUpload } from '../../api/utils';
 
 const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -25,13 +26,21 @@ const Register = () => {
 
   const [regError, setRegError] = useState('');
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     // console.log(e.currentTarget);
     const form = new FormData(e.currentTarget);
+    const myForm = e.target;
 
     const name = form.get('name');
-    const photo = form.get('photo');
+
+    // const image = form.get('image');
+    // const image = e.currentTarget.querySelector('[name="image"]').files[0];
+
+    //photo upload
+    const photoData = myForm.photo.files[0];
+    const photo = await imageUpload(photoData);
+
     const email = form.get('email');
     const blood = form.get('blood');
     const district = form.get('district');
@@ -89,7 +98,7 @@ const Register = () => {
           confirmButtonText: 'Okay',
         });
         navigate('/');
-        updateUserProfile(name, photo)
+        updateUserProfile(name, photo?.data?.display_url)
           .then((res) => {
             console.log('profile updated', res);
           })
@@ -150,14 +159,15 @@ const Register = () => {
               <div className="form-control">
                 <label className="label">
                   <span className="label-text font-medium text-base">
-                    Photo URL
+                    User Avatar
                   </span>
                 </label>
                 <input
-                  type="text"
-                  placeholder="Photo URL"
+                  type="file"
+                  id="photo"
                   name="photo"
-                  className="input input-bordered rounded-none"
+                  accept="image/*"
+                  className="file-input rounded-none"
                   required
                 />
               </div>
