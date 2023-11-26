@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 const Profile = () => {
   const { user } = useAuth();
   const usersProfile = useLoaderData();
+  console.log(usersProfile);
   const [myProfiles, setMyProfiles] = useState([]);
 
   useEffect(() => {

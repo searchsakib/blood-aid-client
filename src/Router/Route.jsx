@@ -75,8 +75,10 @@ const myRoute = createBrowserRouter([
       {
         path: '/dashboard/update-profile/:id',
         element: <UpdateProfile></UpdateProfile>,
-        // loader: ({ params }) =>
-        //   fetch(`https://jobquest-server.vercel.app/update-job/${params.id}`),
+        loader: ({ params }) =>
+          fetch(
+            `https://blood-aid-server.vercel.app/dashboard/update-profile/${params.id}`
+          ),
       },
 
       //! donner (user) routes
