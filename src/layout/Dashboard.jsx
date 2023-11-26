@@ -24,13 +24,34 @@ const Dashboard = () => {
   const [isAdmin] = useAdmin();
 
   return (
-    <div className="flex">
+    <div className="drawer lg:drawer-open">
       <Helmet>
         <title>Blood Aid | Dashboard</title>
       </Helmet>
-      {/* dashboard side bar */}
-      <div className="w-64 min-h-screen bg-orange-400">
-        <ul className="menu p-4">
+      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content flex flex-col items-center justify-center">
+        {/* Page content here */}
+        {/* dashboard content */}
+        <div className="">
+          <Outlet></Outlet>
+        </div>
+        <label
+          htmlFor="my-drawer-2"
+          className="btn btn-primary drawer-button lg:hidden"
+        >
+          Open drawer
+        </label>
+      </div>
+      <div className="drawer-side w-8/12">
+        <label
+          htmlFor="my-drawer-2"
+          aria-label="close sidebar"
+          className="drawer-overlay"
+        ></label>
+        <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+          {/* Sidebar content here */}
+          {/* dashboard side bar */}
+
           {isAdmin ? (
             <>
               <li>
@@ -119,10 +140,6 @@ const Dashboard = () => {
             </NavLink>
           </li> */}
         </ul>
-      </div>
-      {/* dashboard content */}
-      <div className="flex-1 p-8">
-        <Outlet></Outlet>
       </div>
     </div>
   );

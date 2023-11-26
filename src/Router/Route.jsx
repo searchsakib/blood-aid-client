@@ -11,6 +11,7 @@ import SearchPage from '../pages/SearchPage/SearchPage';
 import Dashboard from '../layout/Dashboard';
 import DonnerHome from '../pages/Dashboard/DonnerHome/DonnerHome';
 import AdminHome from '../pages/Dashboard/AdminHome/AdminHome';
+import DefaultView from '../pages/Dashboard/DefaultView/DefaultView';
 
 const myRoute = createBrowserRouter([
   {
@@ -58,6 +59,11 @@ const myRoute = createBrowserRouter([
     path: 'dashboard',
     element: <Dashboard></Dashboard>,
     children: [
+      {
+        index: true,
+        element: <DefaultView></DefaultView>,
+      },
+
       //! donner (user) routes
       {
         path: 'donner-home',
