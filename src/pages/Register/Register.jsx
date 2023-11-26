@@ -41,7 +41,8 @@ const Register = () => {
 
     //photo upload
     const photoData = myForm.photo.files[0];
-    const photo = await imageUpload(photoData);
+    const fetchedPhoto = await imageUpload(photoData);
+    const photo = fetchedPhoto?.data?.display_url;
 
     const email = form.get('email');
     const blood = form.get('blood');
@@ -54,7 +55,7 @@ const Register = () => {
 
     const registeredUserData = {
       name,
-      // photo,
+      photo,
       email,
       blood,
       district,
@@ -102,7 +103,7 @@ const Register = () => {
           confirmButtonText: 'Okay',
         });
         navigate('/');
-        updateUserProfile(name, photo?.data?.display_url)
+        updateUserProfile(name, fetchedPhoto?.data?.display_url)
           .then((res) => {
             console.log('profile updated', res);
             axiosPublic
