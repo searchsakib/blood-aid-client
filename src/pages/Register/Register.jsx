@@ -1,13 +1,13 @@
 import { Helmet } from 'react-helmet-async';
 
 import Swal from 'sweetalert2';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../providers/AuthProvider';
 import towns from '../../data/towns';
+import useAuth from '../../hooks/useAuth';
 
 const Register = () => {
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useAuth();
   const navigate = useNavigate();
 
   // for district and upazilla

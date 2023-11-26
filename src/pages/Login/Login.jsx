@@ -1,15 +1,15 @@
 import { Helmet } from 'react-helmet-async';
 // start
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../providers/AuthProvider';
 import { getAuth } from 'firebase/auth';
 import app from '../../components/Firebase/firebase.config';
+import useAuth from '../../hooks/useAuth';
 // end
 
 const Login = () => {
-  const { signIn, user } = useContext(AuthContext);
+  const { signIn, user } = useAuth();
   console.log(user);
   const auth = getAuth(app);
 

@@ -1,11 +1,11 @@
 import { Link, NavLink } from 'react-router-dom';
 import userPic from '/images/user.png';
 import logo from '/images/logo.png';
-import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../providers/AuthProvider';
+import { useEffect, useState } from 'react';
+import useAuth from '../../hooks/useAuth';
 
 const NavBar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut } = useAuth();
 
   const [name, setName] = useState(null);
   const [photo, setPhoto] = useState(null);
