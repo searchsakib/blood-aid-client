@@ -51,7 +51,7 @@ const Register = () => {
     const password = form.get('password');
     const confirmPassword = form.get('confirmPassword');
     const status = 'active';
-    const role = 'donner';
+    const role = 'donor';
 
     const registeredUserData = {
       name,

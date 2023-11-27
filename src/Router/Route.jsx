@@ -9,12 +9,12 @@ import Fundings from '../pages/Fundings/Fundings';
 import Register from '../pages/Register/Register';
 import SearchPage from '../pages/SearchPage/SearchPage';
 import Dashboard from '../layout/Dashboard';
-import DonnerHome from '../pages/Dashboard/DonnerHome/DonnerHome';
+import DonorHome from '../pages/Dashboard/DonorHome/DonorHome';
 import AdminHome from '../pages/Dashboard/AdminHome/AdminHome';
 import DefaultView from '../pages/Dashboard/DefaultView/DefaultView';
 import Profile from '../pages/Dashboard/Profile/Profile';
 import UpdateProfile from '../pages/Dashboard/Profile/UpdateProfile';
-import DonnerDonationReq from '../pages/Dashboard/DonnerDonationReq/DonnerDonationReq';
+import DonorDonationReq from '../pages/Dashboard/DonorDonationReq/DonorDonationReq';
 import CreateDonationReq from '../pages/Dashboard/CreateDonationReq/CreateDonationReq';
 
 const myRoute = createBrowserRouter([
@@ -76,7 +76,7 @@ const myRoute = createBrowserRouter([
 
       {
         path: '/dashboard/my-donation-requests',
-        element: <DonnerDonationReq></DonnerDonationReq>,
+        element: <DonorDonationReq></DonorDonationReq>,
       },
 
       {
@@ -93,10 +93,10 @@ const myRoute = createBrowserRouter([
           ),
       },
 
-      //! donner (user) routes
+      //! donor (user) routes
       {
-        path: 'donner-home',
-        element: <DonnerHome></DonnerHome>,
+        path: 'donor-home',
+        element: <DonorHome></DonorHome>,
       },
       // {
       //   path: 'cart',

@@ -1,6 +1,6 @@
 import useAdmin from '../../../hooks/useAdmin';
 import AdminScreen from './AdminScreen';
-import DonnerScreen from './DonnerScreen';
+import DonorScreen from './DonorScreen';
 import VolunteerScreen from './VolunteerScreen';
 
 const DefaultView = () => {
@@ -14,7 +14,7 @@ const DefaultView = () => {
         </div>
       ) : (
         <div>
-          <DonnerScreen></DonnerScreen>
+          <DonorScreen></DonorScreen>
         </div>
       )}
 

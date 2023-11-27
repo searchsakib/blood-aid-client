@@ -1,4 +1,4 @@
-const DonnerDonationReq = () => {
+const DonorDonationReq = () => {
   return (
     <div>
       {/* mock data  */}
@@ -176,4 +176,4 @@ const DonnerDonationReq = () => {
   );
 };
 
-export default DonnerDonationReq;
+export default DonorDonationReq;

@@ -48,7 +48,7 @@ const UpdateProfile = () => {
     const district = form.district.value;
     const upazila = form.upazila.value;
     // const status = 'active';
-    // const role = 'donner';
+    // const role = 'donor';
 
     const updatedUserData = {
       name,
@@ -58,7 +58,7 @@ const UpdateProfile = () => {
       district,
       upazila,
       status: 'active',
-      role: 'donner',
+      role: 'donor',
     };
     console.log('New User', updatedUserData);
 

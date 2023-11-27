@@ -111,15 +111,15 @@ const Dashboard = () => {
           ) : (
             <>
               <li>
-                <NavLink to="/dashboard/donner-home">
+                <NavLink to="/dashboard/donor-home">
                   <FaHome></FaHome>
-                  Donner Home
+                  Donor Home
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/dashboard/profile">
                   <FaUser></FaUser>
-                  Donner Profile
+                  Donor Profile
                 </NavLink>
               </li>
               <li>

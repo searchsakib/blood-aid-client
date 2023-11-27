@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
-const DonnerScreen = () => {
+const DonorScreen = () => {
   const { user } = useAuth();
   return (
     <div>
@@ -65,4 +65,4 @@ const DonnerScreen = () => {
   );
 };
 
-export default DonnerScreen;
+export default DonorScreen;
