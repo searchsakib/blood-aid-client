@@ -166,22 +166,25 @@ const UpdateProfile = () => {
                   placeholder="name"
                   name="name"
                   className="input input-bordered rounded-none"
-                  required
                 />
               </div>
               <div className="grid">
                 <label className="label">
                   <span className="label-text font-medium text-base">
-                    User Avatar
+                    Update Avatar
                   </span>
                 </label>
+                <div className="avatar">
+                  <div className="ml-[1px] w-16">
+                    <img src={photo} />
+                  </div>
+                </div>
                 <input
                   type="file"
                   id="photo"
                   name="photo"
                   accept="image/*"
                   className="file-input rounded-none"
-                  required
                 />
               </div>
               <div className="form-control">
@@ -197,7 +200,6 @@ const UpdateProfile = () => {
                   placeholder="email"
                   name="email"
                   className="input input-bordered rounded-none"
-                  required
                 />
               </div>
               {/* Blood group */}
@@ -211,7 +213,6 @@ const UpdateProfile = () => {
                   defaultValue={blood}
                   name="blood"
                   className="input input-bordered rounded-none"
-                  required
                 >
                   <option value="">Select a Blood Group</option>
                   <option value="A+">A+</option>
@@ -238,7 +239,6 @@ const UpdateProfile = () => {
                   name="district"
                   className="input input-bordered rounded-none"
                   onChange={(e) => setDis(e.target.value)}
-                  required
                 >
                   <option value="">Select District</option>
                   {Object.keys(towns)
@@ -266,13 +266,12 @@ const UpdateProfile = () => {
                   name="upazila"
                   className="input input-bordered rounded-none"
                   onChange={(e) => setUpa(e.target.value)}
-                  required
                 >
                   <option value="">Select Upazila</option>
-                  {upazilas.map((upazila) => {
+                  {upazilas.map((myUpazila) => {
                     return (
-                      <option key={upazila} value={upazila}>
-                        {upazila}
+                      <option key={myUpazila} value={myUpazila}>
+                        {myUpazila}
                       </option>
                     );
                   })}
