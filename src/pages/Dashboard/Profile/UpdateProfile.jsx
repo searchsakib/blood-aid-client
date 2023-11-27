@@ -4,18 +4,18 @@ import Swal from 'sweetalert2';
 import { useEffect, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import towns from '../../../data/towns';
-import useAxiosPublic from '../../../hooks/useAxiosPublic';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import useAuth from '../../../hooks/useAuth';
 import { imageUpload } from '../../../api/utils';
 
 const UpdateProfile = () => {
-  const { createUser, updateUserProfile } = useAuth();
-  const axiosPublic = useAxiosPublic();
+  const { updateUserProfile } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const myProfile = useLoaderData();
   console.log('this is hehehehhe', myProfile);
 
-  const { name, photo, email, blood, district, upazila, status, role } =
+  const { _id, name, photo, email, blood, district, upazila, status, role } =
     myProfile || {};
 
   // for district and upazilla
@@ -23,17 +23,11 @@ const UpdateProfile = () => {
   const [upa, setUpa] = useState();
   const [upazilas, setUpazilas] = useState([]);
 
-  // state for password validation
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
   //for district and upazilla Errors
   const [disError, setDisError] = useState('');
   const [upazilaError, setUpazilaError] = useState('');
 
-  const [regError, setRegError] = useState('');
-
-  const handleRegister = async (e) => {
+  const handleUpdateProfile = async (e) => {
     e.preventDefault();
     // console.log(e.currentTarget);
     const form = new FormData(e.currentTarget);
@@ -53,76 +47,56 @@ const UpdateProfile = () => {
     const blood = form.get('blood');
     const district = form.get('district');
     const upazila = form.get('upazila');
-    const password = form.get('password');
-    const confirmPassword = form.get('confirmPassword');
-    const status = 'active';
-    const role = 'donner';
+    // const status = 'active';
+    // const role = 'donner';
 
-    const registeredUserData = {
+    // Validate if required fields are filled
+    if (!name || !photo || !blood || !district || !upazila) {
+      // Handle error for missing fields if necessary
+      console.log('not filled');
+      return;
+    }
+
+    const updatedUserData = {
       name,
       photo,
       email,
       blood,
       district,
       upazila,
-      // password,
-      // confirmPassword,
-      status,
-      role,
+      status: 'active',
+      role: 'donner',
     };
-    console.log('New User', registeredUserData);
+    console.log('New User', updatedUserData);
 
-    setRegError('');
+    // for profile update starts
+    const res = await axiosSecure.put(
+      `/dashboard/update-profile/${_id}`,
+      updatedUserData
+    );
+    console.log(res.data);
+    if (res.data.modifiedCount) {
+      Swal.fire({
+        title: 'Success!',
+        text: 'Profile Updated Successfully',
+        icon: 'success',
+        confirmButtonText: 'Okay',
+      });
+      navigate('/dashboard/profile');
+      updateUserProfile(name, fetchedPhoto?.data?.display_url)
+        .then((res) => {
+          console.log('profile updated', res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    // for profile update ends
 
     // for distric and upazilla again
     district ? setDisError('') : setDisError('Please choose district');
     upazila ? setUpazilaError('') : setUpazilaError('Please choose upazila');
     if (!district || !upazila) return;
-
-    // regex validation
-    if (password.length < 6) {
-      setRegError('Password should be at least 6 characters or longer');
-      return;
-    } else if (!/[A-Z]/.test(password)) {
-      setRegError(
-        'Your password should have at least one upper case characters'
-      );
-      return;
-    } else if (!/[#?!@$%^&*-]/.test(password)) {
-      setRegError('Your password should have at least one special characters');
-      return;
-    } else if (password !== confirmPassword) {
-      // check if passwords match
-      setRegError('Passwords do not match');
-      return;
-    }
-
-    //create user
-    createUser(email, password)
-      .then((result) => {
-        console.log(result.user);
-        Swal.fire({
-          title: 'Registration Successfull!',
-          text: 'You Registered Successfully.',
-          icon: 'success',
-          confirmButtonText: 'Okay',
-        });
-        navigate('/');
-        updateUserProfile(name, fetchedPhoto?.data?.display_url)
-          .then((res) => {
-            console.log('profile updated', res);
-            axiosPublic
-              .post('/users', registeredUserData)
-              .then((res) => console.log(res.data));
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      })
-      .catch((error) => {
-        console.error(error);
-        setRegError(error.message);
-      });
   };
 
   // for district upazilla once again
@@ -153,7 +127,7 @@ const UpdateProfile = () => {
             </h2>
 
             <form
-              onSubmit={handleRegister}
+              onSubmit={handleUpdateProfile}
               className="max-w-lg shadow-none rounded-none pt-4 pb-2"
             >
               <div className="form-control">
@@ -286,13 +260,6 @@ const UpdateProfile = () => {
                 </button>
               </div>
             </form>
-
-            {/* update error  */}
-            {regError && (
-              <div className="text-red-600 text-center text-xl max-w-[540px] mx-auto py-3">
-                <p> {regError} </p>
-              </div>
-            )}
           </div>
         </div>
       </div>
