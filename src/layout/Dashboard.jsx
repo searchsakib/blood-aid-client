@@ -10,6 +10,7 @@ import {
   FaShoppingCart,
   FaUser,
   FaUsers,
+  FaUsersCog,
   FaUtensils,
 } from 'react-icons/fa';
 
@@ -114,16 +115,17 @@ const Dashboard = () => {
               </li>
               <li>
                 <NavLink to="/dashboard/profile">
-                  <FaUser></FaUser>
+                  <FaUsersCog></FaUsersCog>
                   Donner Profile
                 </NavLink>
               </li>
-              {/* <li>
-                <NavLink to="/dashboard/history">
-                  <FaCalendar></FaCalendar>
-                  Not History
+              <li>
+                <NavLink to="/dashboard/my-donation-requests">
+                  <FaUser></FaUser>
+                  My Donation Requests Page
                 </NavLink>
               </li>
+              {/*
               <li>
                 <NavLink to="/dashboard/cart">
                   <FaShoppingCart></FaShoppingCart>
