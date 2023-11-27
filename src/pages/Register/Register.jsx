@@ -163,7 +163,7 @@ const Register = () => {
                   required
                 />
               </div>
-              <div className="form-control">
+              <div className="grid">
                 <label className="label">
                   <span className="label-text font-medium text-base">
                     User Avatar

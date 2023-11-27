@@ -15,12 +15,12 @@ const UpdateProfile = () => {
   const myProfile = useLoaderData();
   console.log('this is hehehehhe', myProfile);
 
-  // const { name, photo, email, blood, dis:district, upazila, status, role } =
-  //   myProfile || {};
+  const { name, photo, email, blood, district, upazila, status, role } =
+    myProfile || {};
 
   // for district and upazilla
-  const [district, setDistrict] = useState();
-  const [upazila, setUpazila] = useState();
+  const [dis, setDis] = useState();
+  const [upa, setUpa] = useState();
   const [upazilas, setUpazilas] = useState([]);
 
   // state for password validation
@@ -127,21 +127,21 @@ const UpdateProfile = () => {
 
   // for district upazilla once again
   useEffect(() => {
-    if (district) {
+    if (dis) {
       setDisError('');
-      setUpazilas(towns[district] || []);
+      setUpazilas(towns[dis] || []);
     }
-  }, [district]);
+  }, [dis]);
 
   useEffect(() => {
-    if (upazila) {
+    if (upa) {
       setUpazilaError('');
     }
-  }, [upazila]);
+  }, [upa]);
 
   return (
-    <div className="bg-gray-100">
-      <div className="max-w-screen-xl mx-auto px-5 md:px-6 2xl:px-0">
+    <div className="bg-gray-100 px-5">
+      <div className="max-w-screen-xl mx-auto">
         <Helmet>
           <title>Blood Aid | Update Profile</title>
         </Helmet>
@@ -161,6 +161,7 @@ const UpdateProfile = () => {
                   <span className="label-text font-medium text-base">Name</span>
                 </label>
                 <input
+                  defaultValue={name}
                   type="text"
                   placeholder="name"
                   name="name"
@@ -168,7 +169,7 @@ const UpdateProfile = () => {
                   required
                 />
               </div>
-              <div className="form-control">
+              <div className="grid">
                 <label className="label">
                   <span className="label-text font-medium text-base">
                     User Avatar
@@ -190,6 +191,8 @@ const UpdateProfile = () => {
                   </span>
                 </label>
                 <input
+                  readOnly
+                  defaultValue={email}
                   type="email"
                   placeholder="email"
                   name="email"
@@ -205,6 +208,7 @@ const UpdateProfile = () => {
                   </span>
                 </label>
                 <select
+                  defaultValue={blood}
                   name="blood"
                   className="input input-bordered rounded-none"
                   required
@@ -230,9 +234,10 @@ const UpdateProfile = () => {
                   </span>
                 </label>
                 <select
+                  defaultValue={district}
                   name="district"
                   className="input input-bordered rounded-none"
-                  onChange={(e) => setDistrict(e.target.value)}
+                  onChange={(e) => setDis(e.target.value)}
                   required
                 >
                   <option value="">Select District</option>
@@ -260,7 +265,7 @@ const UpdateProfile = () => {
                 <select
                   name="upazila"
                   className="input input-bordered rounded-none"
-                  onChange={(e) => setUpazila(e.target.value)}
+                  onChange={(e) => setUpa(e.target.value)}
                   required
                 >
                   <option value="">Select Upazila</option>
