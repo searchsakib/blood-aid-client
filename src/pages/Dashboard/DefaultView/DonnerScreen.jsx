@@ -54,7 +54,7 @@ const DonnerScreen = () => {
 
       <div className="flex items-center justify-center">
         <Link
-          to="/register"
+          to="/dashboard/my-donation-requests"
           rel="noopener noreferrer"
           className="capitalize px-8 py-3 text-lg font-semibold rounded dark:bg-red-600 hover:bg-red-800 transition-colors duration-300 ease-in-out dark:text-white"
         >
