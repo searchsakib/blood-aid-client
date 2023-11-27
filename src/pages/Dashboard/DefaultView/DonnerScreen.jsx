@@ -1,7 +1,9 @@
 const DonnerScreen = () => {
   return (
     <div>
-      <h2>This is Donner Screen</h2>
+      <h2 className="text-3xl p-2 bg-blue-500 text-white">
+        This is Donner Screen
+      </h2>
     </div>
   );
 };

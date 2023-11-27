@@ -13,7 +13,7 @@ const DefaultView = () => {
           <AdminScreen></AdminScreen>
         </div>
       ) : (
-        <div className="bg-sky-300">
+        <div>
           <DonnerScreen></DonnerScreen>
         </div>
       )}

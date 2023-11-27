@@ -32,7 +32,7 @@ const Dashboard = () => {
         <title>Blood Aid | Dashboard</title>
       </Helmet>
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col-reverse items-center justify-center bg-green-400">
+      <div className="drawer-content flex flex-col-reverse items-center justify-center">
         {/* Page content here */}
         {/* dashboard content */}
 

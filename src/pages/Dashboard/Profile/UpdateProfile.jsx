@@ -15,6 +15,9 @@ const UpdateProfile = () => {
   const myProfile = useLoaderData();
   console.log('this is hehehehhe', myProfile);
 
+  // const { name, photo, email, blood, dis:district, upazila, status, role } =
+  //   myProfile || {};
+
   // for district and upazilla
   const [district, setDistrict] = useState();
   const [upazila, setUpazila] = useState();
