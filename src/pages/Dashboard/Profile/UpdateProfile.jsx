@@ -30,10 +30,10 @@ const UpdateProfile = () => {
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     // console.log(e.currentTarget);
-    const form = new FormData(e.currentTarget);
+    const form = e.target;
     const myForm = e.target;
 
-    const name = form.get('name');
+    const name = form.name.value;
 
     // const image = form.get('image');
     // const image = e.currentTarget.querySelector('[name="image"]').files[0];
@@ -43,19 +43,12 @@ const UpdateProfile = () => {
     const fetchedPhoto = await imageUpload(photoData);
     const photo = fetchedPhoto?.data?.display_url;
 
-    const email = form.get('email');
-    const blood = form.get('blood');
-    const district = form.get('district');
-    const upazila = form.get('upazila');
+    const email = form.email.value;
+    const blood = form.blood.value;
+    const district = form.district.value;
+    const upazila = form.upazila.value;
     // const status = 'active';
     // const role = 'donner';
-
-    // Validate if required fields are filled
-    if (!name || !photo || !blood || !district || !upazila) {
-      // Handle error for missing fields if necessary
-      console.log('not filled');
-      return;
-    }
 
     const updatedUserData = {
       name,
@@ -148,12 +141,9 @@ const UpdateProfile = () => {
                     Update Avatar
                   </span>
                 </label>
-                <div className="avatar">
-                  <div className="ml-[1px] w-16">
-                    <img src={photo} />
-                  </div>
-                </div>
+
                 <input
+                  required
                   type="file"
                   id="photo"
                   name="photo"
@@ -237,11 +227,16 @@ const UpdateProfile = () => {
                   </span>
                 </label>
                 <select
+                  defaultValue={upazila}
                   name="upazila"
                   className="input input-bordered rounded-none"
                   onChange={(e) => setUpa(e.target.value)}
                 >
-                  <option value="">Select Upazila</option>
+                  {upazilas.length > 0 ? (
+                    <option value="">Select Upazila</option>
+                  ) : (
+                    <option value={upazila}>{upazila}</option>
+                  )}
                   {upazilas.map((myUpazila) => {
                     return (
                       <option key={myUpazila} value={myUpazila}>
