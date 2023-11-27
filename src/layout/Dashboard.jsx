@@ -1,8 +1,10 @@
 import {
+  FaAccessibleIcon,
   FaAd,
   FaBook,
   FaCalendar,
   FaEnvelope,
+  FaForumbee,
   FaHamburger,
   FaHome,
   FaList,
@@ -13,6 +15,7 @@ import {
   FaUsersCog,
   FaUtensils,
 } from 'react-icons/fa';
+import { IoCreate } from 'react-icons/io5';
 
 // import useCart from '../hooks/useCart';
 import useAdmin from '../hooks/useAdmin';
@@ -115,14 +118,20 @@ const Dashboard = () => {
               </li>
               <li>
                 <NavLink to="/dashboard/profile">
-                  <FaUsersCog></FaUsersCog>
+                  <FaUser></FaUser>
                   Donner Profile
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/dashboard/my-donation-requests">
-                  <FaUser></FaUser>
+                  <FaList></FaList>
                   My Donation Requests Page
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/create-donation-request">
+                  <IoCreate />
+                  Create Donation Requests Page
                 </NavLink>
               </li>
               {/*

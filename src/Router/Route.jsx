@@ -15,6 +15,7 @@ import DefaultView from '../pages/Dashboard/DefaultView/DefaultView';
 import Profile from '../pages/Dashboard/Profile/Profile';
 import UpdateProfile from '../pages/Dashboard/Profile/UpdateProfile';
 import DonnerDonationReq from '../pages/Dashboard/DonnerDonationReq/DonnerDonationReq';
+import CreateDonationReq from '../pages/Dashboard/CreateDonationReq/CreateDonationReq';
 
 const myRoute = createBrowserRouter([
   {
@@ -76,6 +77,11 @@ const myRoute = createBrowserRouter([
       {
         path: '/dashboard/my-donation-requests',
         element: <DonnerDonationReq></DonnerDonationReq>,
+      },
+
+      {
+        path: '/dashboard/create-donation-request',
+        element: <CreateDonationReq></CreateDonationReq>,
       },
 
       {
