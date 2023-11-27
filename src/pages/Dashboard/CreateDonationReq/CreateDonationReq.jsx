@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAuth from '../../../hooks/useAuth';
 import towns from '../../../data/towns';
-import { imageUpload } from '../../../api/utils';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const CreateDonationReq = () => {
@@ -18,10 +17,6 @@ const CreateDonationReq = () => {
   const [upazila, setUpazila] = useState();
   const [upazilas, setUpazilas] = useState([]);
 
-  // state for password validation
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
   //for district and upazilla Errors
   const [disError, setDisError] = useState('');
   const [upazilaError, setUpazilaError] = useState('');
@@ -32,26 +27,14 @@ const CreateDonationReq = () => {
     e.preventDefault();
     // console.log(e.currentTarget);
     const form = new FormData(e.currentTarget);
-    const myForm = e.target;
 
     const name = form.get('name');
-
-    // const image = form.get('image');
-    // const image = e.currentTarget.querySelector('[name="image"]').files[0];
-
-    //photo upload
-    const photoData = myForm.photo.files[0];
-    const fetchedPhoto = await imageUpload(photoData);
-    const photo = fetchedPhoto?.data?.display_url;
-
     const email = form.get('email');
     const blood = form.get('blood');
     const district = form.get('district');
     const upazila = form.get('upazila');
-    const password = form.get('password');
-    const confirmPassword = form.get('confirmPassword');
-    const status = 'active';
-    const role = 'donor';
+    // const status = 'active';
+    // const role = 'donor';
 
     const registeredUserData = {
       name,
@@ -60,10 +43,7 @@ const CreateDonationReq = () => {
       blood,
       district,
       upazila,
-      // password,
-      // confirmPassword,
-      status,
-      role,
+      status: 'pending',
     };
     console.log('New User', registeredUserData);
 
@@ -73,24 +53,6 @@ const CreateDonationReq = () => {
     district ? setDisError('') : setDisError('Please choose district');
     upazila ? setUpazilaError('') : setUpazilaError('Please choose upazila');
     if (!district || !upazila) return;
-
-    // regex validation
-    // if (password.length < 6) {
-    //   setRegError('Password should be at least 6 characters or longer');
-    //   return;
-    // } else if (!/[A-Z]/.test(password)) {
-    //   setRegError(
-    //     'Your password should have at least one upper case characters'
-    //   );
-    //   return;
-    // } else if (!/[#?!@$%^&*-]/.test(password)) {
-    //   setRegError('Your password should have at least one special characters');
-    //   return;
-    // } else if (password !== confirmPassword) {
-    //   // check if passwords match
-    //   setRegError('Passwords do not match');
-    //   return;
-    // }
 
     //create user
     // createUser(email, password)
@@ -178,6 +140,23 @@ const CreateDonationReq = () => {
                   required
                 />
               </div>
+
+              {/* recipient name */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium text-base">
+                    Recipient Name
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="name"
+                  name="name"
+                  className="input input-bordered rounded-none"
+                  required
+                />
+              </div>
+
               {/* Blood group */}
               <div className="form-control">
                 <label className="label">
@@ -207,7 +186,7 @@ const CreateDonationReq = () => {
               <div className="form-control">
                 <label className="label">
                   <span className="label-text font-medium text-base">
-                    District
+                    Recipient District
                   </span>
                 </label>
                 <select
@@ -235,7 +214,7 @@ const CreateDonationReq = () => {
               <div className="form-control">
                 <label className="label">
                   <span className="label-text font-medium text-base">
-                    Upazila
+                    Recipient Upazila
                   </span>
                 </label>
                 <select
@@ -256,6 +235,81 @@ const CreateDonationReq = () => {
                 <p className=" mt-1 text-sm text-red-500">{upazilaError}</p>
               </div>
               {/* Upazila End */}
+
+              {/* hospital name  */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium text-base">
+                    Hospital Name
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="name"
+                  name="name"
+                  className="input input-bordered rounded-none"
+                  required
+                />
+              </div>
+
+              {/* full address  */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium text-base">
+                    Full Address
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="name"
+                  name="name"
+                  className="input input-bordered rounded-none"
+                  required
+                />
+              </div>
+
+              {/* donation date */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium text-base">
+                    Donation Date
+                  </span>
+                </label>
+                <input
+                  type="date"
+                  className="input input-bordered rounded-none"
+                  name="deadline"
+                  required
+                />
+              </div>
+
+              {/* donation time */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium text-base">
+                    Donation Time
+                  </span>
+                </label>
+                <input
+                  type="time"
+                  className="input input-bordered rounded-none"
+                  name="deadline"
+                  required
+                />
+              </div>
+
+              {/* request message */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium text-base">
+                    Request Message
+                  </span>
+                </label>
+                <textarea
+                  placeholder=""
+                  className="textarea textarea-bordered textarea-lg w-full"
+                ></textarea>
+              </div>
 
               <div className="form-control mt-6">
                 <button className="btn bg-[#05386B] text-white hover:text-[#05386B]  hover:bg-blue-50 hover:border-2 hover:border-[#05386B] rounded-none">
