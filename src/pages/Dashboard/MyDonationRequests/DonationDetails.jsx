@@ -1,14 +1,14 @@
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../../../hooks/useAuth';
 import towns from '../../../data/towns';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const DonationDetails = () => {
   const { user } = useAuth();
-  // const axiosSecure = useAxiosSecure();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const myDonationDetails = useLoaderData();
   const {
@@ -24,7 +24,19 @@ const DonationDetails = () => {
     donation_date,
     donation_time,
     request_message,
+    status,
   } = myDonationDetails || {};
+
+  // making status in progress
+  const handleStatus = (id) => {
+    axiosSecure.patch(`/dashboard/status/${id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        navigate('/dashboard/my-donation-requests');
+      }
+    });
+  };
+
   // console.log('Why its not working', myDonationDetails);
 
   // for district and upazilla
@@ -269,9 +281,16 @@ const DonationDetails = () => {
                     </div>
 
                     <div className="form-control mt-6">
-                      <button className="btn bg-[#05386B] text-white hover:text-[#05386B] hover:bg-blue-50 hover:border-2 hover:border-[#05386B] rounded-none">
-                        Confirm
-                      </button>
+                      {status === 'inprogress' ? (
+                        <p>Inprogress Now...</p>
+                      ) : (
+                        <button
+                          onClick={() => handleStatus(_id)}
+                          className="btn bg-[#05386B] text-white hover:text-[#05386B] hover:bg-blue-50 hover:border-2 hover:border-[#05386B] rounded-none"
+                        >
+                          Confirm
+                        </button>
+                      )}
                     </div>
                   </form>
 
