@@ -16,6 +16,7 @@ import Profile from '../pages/Dashboard/Profile/Profile';
 import UpdateProfile from '../pages/Dashboard/Profile/UpdateProfile';
 import MyDonationRequests from '../pages/Dashboard/MyDonationRequests/MyDonationRequests';
 import CreateDonationReq from '../pages/Dashboard/CreateDonationReq/CreateDonationReq';
+import MyDonationRequestsUpdate from '../pages/Dashboard/MyDonationRequests/MyDonationRequestsUpdate';
 
 const myRoute = createBrowserRouter([
   {
@@ -77,10 +78,14 @@ const myRoute = createBrowserRouter([
       {
         path: '/dashboard/my-donation-requests',
         element: <MyDonationRequests></MyDonationRequests>,
-        loader: () =>
-          fetch(
-            'https://blood-aid-server.vercel.app/dashboard/create-donation-request'
-          ),
+        // loader: () =>
+        //   fetch(
+        //     'https://blood-aid-server.vercel.app/dashboard/create-donation-request'
+        //   ),
+      },
+      {
+        path: '/dashboard/my-donation-requests-update',
+        element: <MyDonationRequestsUpdate></MyDonationRequestsUpdate>,
       },
 
       {

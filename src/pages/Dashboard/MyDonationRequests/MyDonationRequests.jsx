@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../../../hooks/useAuth';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { useState } from 'react';
 import useDonationReqs from '../../../hooks/useDonationReqs';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
@@ -60,51 +60,58 @@ const MyDonationRequests = () => {
               </tr>
             </thead>
 
-            <tbody className="divide-y divide-gray-200">
-              <tr>
-                <th>1{/* {index+1} */}</th>
-                <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                  jhon doe
-                </td>
-                <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
-                  <p>Rajbari Sadar</p>
-                  <p>Rajbari</p>
-                </td>
-                <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                  12.12.2023
-                </td>
-                <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                  5:12pm
-                </td>
-                <td className="whitespace-nowrap px-4 py-2 text-gray-700 flex flex-col gap-3">
-                  <button className="btn btn-xs rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
-                    Done
-                  </button>
-                  <button className="btn btn-xs rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
-                    Canceled
-                  </button>
-                </td>
-                <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
-                  <p>Matt Henry</p>
-                  <p>matthenry@mail.com</p>
-                </td>
-                <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                  <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
-                    Edit
-                  </button>
-                </td>
-                <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                  <button className="btn btn-sm rounded-none bg-[#d33] text-white hover:bg-[#ac2828]">
-                    Delete
-                  </button>
-                </td>
-                <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                  <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
-                    View
-                  </button>
-                </td>
-              </tr>
-            </tbody>
+            {donationReqs?.map((perDonationReq) => (
+              <tbody
+                key={perDonationReq?._id}
+                className="divide-y divide-gray-200"
+              >
+                <tr>
+                  <th>1{/* {index+1} */}</th>
+                  <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    {perDonationReq?.recipient_name}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
+                    <p>{perDonationReq?.recipient_upazila},</p>
+                    <p> {perDonationReq?.recipient_district} </p>
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {perDonationReq?.donation_date}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {perDonationReq?.donation_time}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700 flex flex-col gap-3">
+                    <button className="btn btn-xs rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                      Done
+                    </button>
+                    <button className="btn btn-xs rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                      Canceled
+                    </button>
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
+                    <p>Matt Henry</p>
+                    <p>matthenry@mail.com</p>
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    <Link to="/dashboard/my-donation-requests-update">
+                      <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                        Edit
+                      </button>
+                    </Link>
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    <button className="btn btn-sm rounded-none bg-[#d33] text-white hover:bg-[#ac2828]">
+                      Delete
+                    </button>
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                      View
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            ))}
           </table>
         </div>
 
