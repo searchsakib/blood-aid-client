@@ -2,16 +2,25 @@ import { Helmet } from 'react-helmet-async';
 import useAuth from '../../../hooks/useAuth';
 import { useLoaderData } from 'react-router-dom';
 import { useState } from 'react';
+import useDonationReqs from '../../../hooks/useDonationReqs';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const MyDonationRequests = () => {
-  const { user } = useAuth();
-  const myDonationReqs = useLoaderData();
-  const [donationReqs, setDonationReqs] = useState([]);
+  // const { user } = useAuth();
 
-  console.log(myDonationReqs);
+  const [donationReqs, refetch] = useDonationReqs();
+  console.log('This is donation req', donationReqs);
+  const axiosSecure = useAxiosSecure();
+
+  // const myDonationReqs = useLoaderData();
+  // const [theDonationReqs, setTheDonationReqs] = useState([]);
+  // console.log(myDonationReqs);
 
   return (
     <div>
+      <div className="text-3xl text-center py-5">
+        Data fetched here: {donationReqs.length}
+      </div>
       {/* mock data  */}
 
       <div className="rounded-lg border border-gray-200">
@@ -50,7 +59,7 @@ const MyDonationRequests = () => {
               <tr>
                 <th>1{/* {index+1} */}</th>
                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                  John Doe
+                  jhon doe
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
                   <p>Rajbari Sadar</p>
