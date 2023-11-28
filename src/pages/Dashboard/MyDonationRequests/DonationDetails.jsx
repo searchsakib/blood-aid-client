@@ -7,7 +7,7 @@ import useAuth from '../../../hooks/useAuth';
 import towns from '../../../data/towns';
 
 const DonationDetails = () => {
-  // const { user } = useAuth();
+  const { user } = useAuth();
   // const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const myDonationDetails = useLoaderData();
@@ -35,6 +35,10 @@ const DonationDetails = () => {
   //for district and upazilla Errors
   // const [disError, setDisError] = useState('');
   // const [upazilaError, setUpazilaError] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   const handleDonate = async (e) => {
     e.preventDefault();
@@ -122,7 +126,7 @@ const DonationDetails = () => {
           </h2>
           <div className="mx-auto w-5/12 min-w-fit ">
             <div className="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
-              <dl className="-my-3 divide-y divide-gray-100 text-sm">
+              <dl className="-my-3 divide-y divide-gray-100 text-base">
                 <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
                   <dt className="font-medium text-gray-900 capitalize">
                     requester name
@@ -218,6 +222,67 @@ const DonationDetails = () => {
                   </dd>
                 </div>
               </dl>
+            </div>
+            <div className="text-center mt-5">
+              {/* Open the modal using document.getElementById('ID').showModal() method */}
+              <button
+                className="btn text-white bg-red-600 hover:bg-red-800"
+                onClick={() =>
+                  document.getElementById('my_modal_1').showModal()
+                }
+              >
+                Donate Blood
+              </button>
+              <dialog id="my_modal_1" className="modal">
+                <div className="modal-box">
+                  <form
+                    onSubmit={handleSubmit}
+                    className="shadow-none rounded-none"
+                  >
+                    <div className="form-control">
+                      <label className="label">
+                        <span className="label-text font-medium text-base">
+                          Donor Name
+                        </span>
+                      </label>
+                      <input
+                        value={user?.displayName}
+                        readOnly
+                        type="text"
+                        name="name"
+                        className="input input-bordered rounded-none cursor-not-allowed"
+                      />
+                    </div>
+                    <div className="form-control">
+                      <label className="label">
+                        <span className="label-text font-medium text-base">
+                          Donor Email
+                        </span>
+                      </label>
+                      <input
+                        value={user?.email}
+                        readOnly
+                        type="email"
+                        name="email"
+                        className="input input-bordered rounded-none cursor-not-allowed"
+                      />
+                    </div>
+
+                    <div className="form-control mt-6">
+                      <button className="btn bg-[#05386B] text-white hover:text-[#05386B] hover:bg-blue-50 hover:border-2 hover:border-[#05386B] rounded-none">
+                        Confirm
+                      </button>
+                    </div>
+                  </form>
+
+                  <div className="modal-action">
+                    <form method="dialog" className="text-center mx-auto">
+                      {/* if there is a button in form, it will close the modal */}
+                      <button className="btn">Close</button>
+                    </form>
+                  </div>
+                </div>
+              </dialog>
             </div>
           </div>
         </div>
