@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
@@ -7,9 +7,23 @@ import useAuth from '../../../hooks/useAuth';
 import towns from '../../../data/towns';
 
 const MyDonationRequestsUpdate = () => {
-  const { createUser, updateUserProfile, user } = useAuth();
-  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
   const navigate = useNavigate();
+  const myUpdate = useLoaderData();
+  const {
+    requester_name,
+    requester_email,
+    recipient_name,
+    blood,
+    recipient_district,
+    recipient_upazila,
+    hospital_name,
+    full_address,
+    donation_date,
+    donation_time,
+    request_message,
+  } = myUpdate || {};
+  console.log('Why its not working', myUpdate);
 
   // for district and upazilla
   const [district, setDistrict] = useState();
@@ -20,7 +34,7 @@ const MyDonationRequestsUpdate = () => {
   const [disError, setDisError] = useState('');
   const [upazilaError, setUpazilaError] = useState('');
 
-  const handleRegister = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     // console.log(e.currentTarget);
     const form = new FormData(e.currentTarget);
@@ -55,53 +69,10 @@ const MyDonationRequestsUpdate = () => {
     };
     console.log('New User', donationReqInfo);
 
-    const res = await axiosSecure.post(
-      '/dashboard/create-donation-request',
-      donationReqInfo
-    );
-    console.log(res.data);
-    if (res.data.insertedId) {
-      Swal.fire({
-        title: 'Success!',
-        text: 'Donation Request Created Successfully',
-        icon: 'success',
-        confirmButtonText: 'Okay',
-      });
-      navigate('/dashboard/my-donation-requests');
-    }
-    form.reset();
-
     // for distric and upazilla again
     district ? setDisError('') : setDisError('Please choose district');
     upazila ? setUpazilaError('') : setUpazilaError('Please choose upazila');
     if (!district || !upazila) return;
-
-    //create user
-    // createUser(email, password)
-    //   .then((result) => {
-    //     console.log(result.user);
-    //     Swal.fire({
-    //       title: 'Registration Successfull!',
-    //       text: 'You Registered Successfully.',
-    //       icon: 'success',
-    //       confirmButtonText: 'Okay',
-    //     });
-    //     navigate('/');
-    //     updateUserProfile(name, fetchedPhoto?.data?.display_url)
-    //       .then((res) => {
-    //         console.log('profile updated', res);
-    //         axiosSecure
-    //           .post('/users', registeredUserData)
-    //           .then((res) => console.log(res.data));
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //     setRegError(error.message);
-    //   });
   };
 
   // for district upazilla once again
@@ -131,7 +102,7 @@ const MyDonationRequestsUpdate = () => {
             </h2>
 
             <form
-              onSubmit={handleRegister}
+              onSubmit={handleUpdate}
               className="max-w-lg shadow-none rounded-none pt-4 pb-2"
             >
               <div className="form-control">
@@ -174,6 +145,7 @@ const MyDonationRequestsUpdate = () => {
                   </span>
                 </label>
                 <input
+                  defaultValue={recipient_name}
                   type="text"
                   placeholder="recipient name"
                   name="recipient_name"
@@ -190,6 +162,7 @@ const MyDonationRequestsUpdate = () => {
                   </span>
                 </label>
                 <select
+                  defaultValue={blood}
                   name="blood"
                   className="input input-bordered rounded-none"
                   required
@@ -215,6 +188,7 @@ const MyDonationRequestsUpdate = () => {
                   </span>
                 </label>
                 <select
+                  defaultValue={recipient_district}
                   name="recipient_district"
                   className="input input-bordered rounded-none"
                   onChange={(e) => setDistrict(e.target.value)}
@@ -269,6 +243,7 @@ const MyDonationRequestsUpdate = () => {
                   </span>
                 </label>
                 <input
+                  defaultValue={hospital_name}
                   type="text"
                   placeholder="hospital name"
                   name="hospital_name"
@@ -285,6 +260,7 @@ const MyDonationRequestsUpdate = () => {
                   </span>
                 </label>
                 <input
+                  defaultValue={full_address}
                   type="text"
                   placeholder="full address"
                   name="full_address"
@@ -301,6 +277,7 @@ const MyDonationRequestsUpdate = () => {
                   </span>
                 </label>
                 <input
+                  defaultValue={donation_date}
                   type="date"
                   className="input input-bordered rounded-none"
                   name="donation_date"
@@ -316,6 +293,7 @@ const MyDonationRequestsUpdate = () => {
                   </span>
                 </label>
                 <input
+                  defaultValue={donation_time}
                   type="time"
                   className="input input-bordered rounded-none"
                   name="donation_time"
@@ -331,6 +309,7 @@ const MyDonationRequestsUpdate = () => {
                   </span>
                 </label>
                 <textarea
+                  defaultValue={request_message}
                   required
                   name="request_message"
                   placeholder=""
