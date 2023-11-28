@@ -163,7 +163,7 @@ const UpdateProfile = () => {
                   type="email"
                   placeholder="email"
                   name="email"
-                  className="input input-bordered rounded-none"
+                  className="input input-bordered rounded-none cursor-not-allowed "
                 />
               </div>
               {/* Blood group */}

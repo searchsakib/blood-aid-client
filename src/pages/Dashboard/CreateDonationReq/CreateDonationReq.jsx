@@ -147,7 +147,7 @@ const CreateDonationReq = () => {
                   type="text"
                   placeholder=""
                   name="requester_name"
-                  className="input input-bordered rounded-none"
+                  className="input input-bordered rounded-none cursor-not-allowed"
                   readOnly
                 />
               </div>
@@ -163,7 +163,7 @@ const CreateDonationReq = () => {
                   type="email"
                   placeholder=""
                   name="requester_email"
-                  className="input input-bordered rounded-none"
+                  className="input input-bordered rounded-none cursor-not-allowed"
                   readOnly
                 />
               </div>
