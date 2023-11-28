@@ -21,33 +21,56 @@ const CreateDonationReq = () => {
   const [disError, setDisError] = useState('');
   const [upazilaError, setUpazilaError] = useState('');
 
-  const [regError, setRegError] = useState('');
-
   const handleRegister = async (e) => {
     e.preventDefault();
     // console.log(e.currentTarget);
     const form = new FormData(e.currentTarget);
 
-    const name = form.get('name');
-    const email = form.get('email');
+    const requester_name = form.get('requester_name');
+    const requester_email = form.get('requester_email');
+    const recipient_name = form.get('recipient_name');
     const blood = form.get('blood');
-    const district = form.get('district');
-    const upazila = form.get('upazila');
+    const recipient_district = form.get('recipient_district');
+    const recipient_upazila = form.get('recipient_upazila');
+    const hospital_name = form.get('hospital_name');
+    const full_address = form.get('full_address');
+    const donation_date = form.get('donation_date');
+    const donation_time = form.get('donation_time');
+    const request_message = form.get('request_message');
     // const status = 'active';
     // const role = 'donor';
 
-    const registeredUserData = {
-      name,
-      photo,
-      email,
+    const donationReqInfo = {
+      requester_name,
+      requester_email,
+      recipient_name,
       blood,
-      district,
-      upazila,
+      recipient_district,
+      recipient_upazila,
+      hospital_name,
+      full_address,
+      donation_date,
+      donation_time,
+      request_message,
       status: 'pending',
     };
-    console.log('New User', registeredUserData);
+    console.log('New User', donationReqInfo);
 
-    setRegError('');
+    const res = await axiosSecure.post(
+      '/dashboard/create-donation-request',
+      donationReqInfo
+    );
+    console.log(res.data);
+    if (res.data.insertedId) {
+      Swal.fire({
+        title: 'Success!',
+        text: 'Donation Request Created Successfully',
+        icon: 'success',
+        confirmButtonText: 'Okay',
+      });
+      navigate('/dashboard/my-donation-requests');
+    }
+    form.reset();
 
     // for distric and upazilla again
     district ? setDisError('') : setDisError('Please choose district');
@@ -115,14 +138,17 @@ const CreateDonationReq = () => {
             >
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text font-medium text-base">Name</span>
+                  <span className="label-text font-medium text-base">
+                    Requester Name
+                  </span>
                 </label>
                 <input
+                  defaultValue={user?.displayName}
                   type="text"
-                  placeholder="name"
-                  name="name"
+                  placeholder=""
+                  name="requester_name"
                   className="input input-bordered rounded-none"
-                  required
+                  readOnly
                 />
               </div>
 
@@ -133,11 +159,12 @@ const CreateDonationReq = () => {
                   </span>
                 </label>
                 <input
+                  defaultValue={user?.email}
                   type="email"
-                  placeholder="email"
-                  name="email"
+                  placeholder=""
+                  name="requester_email"
                   className="input input-bordered rounded-none"
-                  required
+                  readOnly
                 />
               </div>
 
@@ -150,8 +177,8 @@ const CreateDonationReq = () => {
                 </label>
                 <input
                   type="text"
-                  placeholder="name"
-                  name="name"
+                  placeholder="recipient name"
+                  name="recipient_name"
                   className="input input-bordered rounded-none"
                   required
                 />
@@ -190,7 +217,7 @@ const CreateDonationReq = () => {
                   </span>
                 </label>
                 <select
-                  name="district"
+                  name="recipient_district"
                   className="input input-bordered rounded-none"
                   onChange={(e) => setDistrict(e.target.value)}
                   required
@@ -218,7 +245,7 @@ const CreateDonationReq = () => {
                   </span>
                 </label>
                 <select
-                  name="upazila"
+                  name="recipient_upazila"
                   className="input input-bordered rounded-none"
                   onChange={(e) => setUpazila(e.target.value)}
                   required
@@ -245,8 +272,8 @@ const CreateDonationReq = () => {
                 </label>
                 <input
                   type="text"
-                  placeholder="name"
-                  name="name"
+                  placeholder="hospital name"
+                  name="hospital_name"
                   className="input input-bordered rounded-none"
                   required
                 />
@@ -261,8 +288,8 @@ const CreateDonationReq = () => {
                 </label>
                 <input
                   type="text"
-                  placeholder="name"
-                  name="name"
+                  placeholder="full address"
+                  name="full_address"
                   className="input input-bordered rounded-none"
                   required
                 />
@@ -278,7 +305,7 @@ const CreateDonationReq = () => {
                 <input
                   type="date"
                   className="input input-bordered rounded-none"
-                  name="deadline"
+                  name="donation_date"
                   required
                 />
               </div>
@@ -293,7 +320,7 @@ const CreateDonationReq = () => {
                 <input
                   type="time"
                   className="input input-bordered rounded-none"
-                  name="deadline"
+                  name="donation_time"
                   required
                 />
               </div>
@@ -306,8 +333,10 @@ const CreateDonationReq = () => {
                   </span>
                 </label>
                 <textarea
+                  required
+                  name="request_message"
                   placeholder=""
-                  className="textarea textarea-bordered textarea-lg w-full"
+                  className="textarea textarea-bordered textarea-lg w-full text-lg px-3"
                 ></textarea>
               </div>
 
