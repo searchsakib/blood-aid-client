@@ -8,9 +8,11 @@ import towns from '../../../data/towns';
 
 const MyDonationRequestsUpdate = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const myUpdate = useLoaderData();
   const {
+    _id,
     requester_name,
     requester_email,
     recipient_name,
@@ -31,8 +33,8 @@ const MyDonationRequestsUpdate = () => {
   const [upazilas, setUpazilas] = useState([]);
 
   //for district and upazilla Errors
-  const [disError, setDisError] = useState('');
-  const [upazilaError, setUpazilaError] = useState('');
+  // const [disError, setDisError] = useState('');
+  // const [upazilaError, setUpazilaError] = useState('');
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -53,7 +55,7 @@ const MyDonationRequestsUpdate = () => {
     // const status = 'active';
     // const role = 'donor';
 
-    const donationReqInfo = {
+    const updatedDonationReq = {
       requester_name,
       requester_email,
       recipient_name,
@@ -67,25 +69,44 @@ const MyDonationRequestsUpdate = () => {
       request_message,
       status: 'pending',
     };
-    console.log('New User', donationReqInfo);
+    console.log('New User', updatedDonationReq);
+
+    //! for donation request upadate starts
+    const res = await axiosSecure.put(
+      `/dashboard/my-donation-requests-update/${_id}`,
+      updatedDonationReq
+    );
+    console.log(res.data);
+    if (res.data.modifiedCount) {
+      Swal.fire({
+        title: 'Success!',
+        text: 'Donation Request Updated Successfully',
+        icon: 'success',
+        confirmButtonText: 'Okay',
+      });
+      navigate('/dashboard/my-donation-requests');
+    }
+
+    //! for donation request upadate ends
 
     // for distric and upazilla again
-    district ? setDisError('') : setDisError('Please choose district');
-    upazila ? setUpazilaError('') : setUpazilaError('Please choose upazila');
-    if (!district || !upazila) return;
+    // district ? setDisError('') : setDisError('Please choose district');
+    // upazila ? setUpazilaError('') : setUpazilaError('Please choose upazila');
+    // if (!district || !upazila) return;
   };
 
   // for district upazilla once again
   useEffect(() => {
     if (district) {
-      setDisError('');
+      // setDisError('');
       setUpazilas(towns[district] || []);
     }
   }, [district]);
 
   useEffect(() => {
     if (upazila) {
-      setUpazilaError('');
+      // setUpazilaError('');
+      console.log('hehe');
     }
   }, [upazila]);
   return (
@@ -192,7 +213,6 @@ const MyDonationRequestsUpdate = () => {
                   name="recipient_district"
                   className="input input-bordered rounded-none"
                   onChange={(e) => setDistrict(e.target.value)}
-                  required
                 >
                   <option value="">Select District</option>
                   {Object.keys(towns)
@@ -205,7 +225,7 @@ const MyDonationRequestsUpdate = () => {
                       );
                     })}
                 </select>
-                <p className=" mt-1 text-sm text-red-500">{disError}</p>
+                {/* <p className=" mt-1 text-sm text-red-500">{disError}</p> */}
               </div>
               {/* District End */}
 
@@ -217,12 +237,18 @@ const MyDonationRequestsUpdate = () => {
                   </span>
                 </label>
                 <select
+                  defaultValue={recipient_upazila}
                   name="recipient_upazila"
                   className="input input-bordered rounded-none"
                   onChange={(e) => setUpazila(e.target.value)}
-                  required
                 >
-                  <option value="">Select Upazila</option>
+                  {upazilas.length > 0 ? (
+                    <option value="">Select Upazila</option>
+                  ) : (
+                    <option value={recipient_upazila}>
+                      {recipient_upazila}
+                    </option>
+                  )}
                   {upazilas.map((upazila) => {
                     return (
                       <option key={upazila} value={upazila}>
@@ -231,7 +257,7 @@ const MyDonationRequestsUpdate = () => {
                     );
                   })}
                 </select>
-                <p className=" mt-1 text-sm text-red-500">{upazilaError}</p>
+                {/* <p className=" mt-1 text-sm text-red-500">{upazilaError}</p> */}
               </div>
               {/* Upazila End */}
 
