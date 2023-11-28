@@ -258,7 +258,7 @@ const DonationDetails = () => {
                         </span>
                       </label>
                       <input
-                        value={user?.displayName}
+                        defaultValue={user?.displayName}
                         readOnly
                         type="text"
                         name="name"
@@ -272,7 +272,7 @@ const DonationDetails = () => {
                         </span>
                       </label>
                       <input
-                        value={user?.email}
+                        defaultValue={user?.email}
                         readOnly
                         type="email"
                         name="email"
