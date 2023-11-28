@@ -139,9 +139,13 @@ const MyDonationRequests = () => {
                     </button>
                   </td>
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                    <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
-                      View
-                    </button>
+                    <Link
+                      to={`/dashboard/donation-details/${perDonationReq?._id}`}
+                    >
+                      <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                        View
+                      </button>
+                    </Link>
                   </td>
                 </tr>
               </tbody>
