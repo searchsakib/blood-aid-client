@@ -84,8 +84,12 @@ const myRoute = createBrowserRouter([
         //   ),
       },
       {
-        path: '/dashboard/my-donation-requests-update',
+        path: '/dashboard/my-donation-requests-update/:id',
         element: <MyDonationRequestsUpdate></MyDonationRequestsUpdate>,
+        loader: ({ params }) =>
+          fetch(
+            `https://blood-aid-server.vercel.app/dashboard/my-donation-requests-update/${params.id}`
+          ),
       },
 
       {

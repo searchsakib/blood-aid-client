@@ -89,11 +89,13 @@ const MyDonationRequests = () => {
                     </button>
                   </td>
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
-                    <p>Matt Henry</p>
-                    <p>matthenry@mail.com</p>
+                    <p> {perDonationReq?.requester_name} </p>
+                    <p> {perDonationReq?.requester_email} </p>
                   </td>
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                    <Link to="/dashboard/my-donation-requests-update">
+                    <Link
+                      to={`/dashboard/my-donation-requests-update/${perDonationReq?._id}`}
+                    >
                       <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
                         Edit
                       </button>
