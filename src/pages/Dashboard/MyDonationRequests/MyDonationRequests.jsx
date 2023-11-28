@@ -4,6 +4,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 import { useState } from 'react';
 import useDonationReqs from '../../../hooks/useDonationReqs';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const MyDonationRequests = () => {
   // const { user } = useAuth();
@@ -11,6 +12,34 @@ const MyDonationRequests = () => {
   const [donationReqs, refetch, isLoading] = useDonationReqs();
   console.log('This is donation req', donationReqs);
   const axiosSecure = useAxiosSecure();
+
+  //! Delete Functionality
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/dashboard/create-donation-request/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount > 0) {
+              refetch();
+              Swal.fire({
+                title: 'Deleted!',
+                text: 'Your file has been deleted.',
+                icon: 'success',
+              });
+            }
+          });
+      }
+    });
+  };
 
   if (isLoading)
     return (
@@ -60,13 +89,13 @@ const MyDonationRequests = () => {
               </tr>
             </thead>
 
-            {donationReqs?.map((perDonationReq) => (
+            {donationReqs?.map((perDonationReq, index) => (
               <tbody
                 key={perDonationReq?._id}
                 className="divide-y divide-gray-200"
               >
                 <tr>
-                  <th>1{/* {index+1} */}</th>
+                  <th>{index + 1}</th>
                   <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                     {perDonationReq?.recipient_name}
                   </td>
@@ -102,7 +131,10 @@ const MyDonationRequests = () => {
                     </Link>
                   </td>
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                    <button className="btn btn-sm rounded-none bg-[#d33] text-white hover:bg-[#ac2828]">
+                    <button
+                      onClick={() => handleDelete(perDonationReq?._id)}
+                      className="btn btn-sm rounded-none bg-[#d33] text-white hover:bg-[#ac2828]"
+                    >
                       Delete
                     </button>
                   </td>
@@ -140,17 +172,17 @@ const MyDonationRequests = () => {
               </a>
             </li>
 
+            <li className="block h-8 w-8 rounded border-blue-600 bg-blue-600 text-center leading-8 text-white">
+              1
+            </li>
+
             <li>
               <a
                 href="#"
                 className="block h-8 w-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900"
               >
-                1
+                2
               </a>
-            </li>
-
-            <li className="block h-8 w-8 rounded border-blue-600 bg-blue-600 text-center leading-8 text-white">
-              2
             </li>
 
             <li>
