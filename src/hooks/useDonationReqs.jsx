@@ -8,7 +8,11 @@ const useDonationReqs = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  const { refetch, data: donationReqs = [] } = useQuery({
+  const {
+    refetch,
+    isLoading,
+    data: donationReqs = [],
+  } = useQuery({
     queryKey: ['donationReqs', user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -19,7 +23,7 @@ const useDonationReqs = () => {
     },
   });
 
-  return [donationReqs, refetch];
+  return [donationReqs, refetch, isLoading];
 };
 
 export default useDonationReqs;

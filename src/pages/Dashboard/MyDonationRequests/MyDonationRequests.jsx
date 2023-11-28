@@ -8,9 +8,14 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 const MyDonationRequests = () => {
   // const { user } = useAuth();
 
-  const [donationReqs, refetch] = useDonationReqs();
+  const [donationReqs, refetch, isLoading] = useDonationReqs();
   console.log('This is donation req', donationReqs);
   const axiosSecure = useAxiosSecure();
+
+  if (isLoading)
+    return (
+      <span className="loading loading-bars text-red-500 loading-lg"></span>
+    );
 
   // const myDonationReqs = useLoaderData();
   // const [theDonationReqs, setTheDonationReqs] = useState([]);
