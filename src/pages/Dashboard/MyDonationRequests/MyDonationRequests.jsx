@@ -52,8 +52,9 @@ const MyDonationRequests = () => {
                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                   John Doe
                 </td>
-                <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                  Rajbari Sadar, Rajbari
+                <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
+                  <p>Rajbari Sadar</p>
+                  <p>Rajbari</p>
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                   12.12.2023
@@ -62,20 +63,31 @@ const MyDonationRequests = () => {
                   5:12pm
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700 flex flex-col gap-3">
-                  <button className="btn btn-xs">Done</button>
-                  <button className="btn btn-xs">Canceled</button>
+                  <button className="btn btn-xs rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                    Done
+                  </button>
+                  <button className="btn btn-xs rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                    Canceled
+                  </button>
+                </td>
+                <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
+                  <p>Matt Henry</p>
+                  <p>matthenry@mail.com</p>
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                  Matt Henry, matthenry@mail.com
+                  <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                    Edit
+                  </button>
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                  <button className="btn btn-xs">Edit</button>
+                  <button className="btn btn-sm rounded-none bg-[#d33] text-white hover:bg-[#ac2828]">
+                    Delete
+                  </button>
                 </td>
                 <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                  <button className="btn btn-xs">Delete</button>
-                </td>
-                <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                  <button className="btn btn-xs">View</button>
+                  <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                    View
+                  </button>
                 </td>
               </tr>
             </tbody>
