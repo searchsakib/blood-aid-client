@@ -23,9 +23,9 @@ const MyDonationRequests = () => {
 
   return (
     <div>
-      <div className="text-3xl text-center py-5">
+      {/* <div className="text-3xl text-center py-5">
         Data fetched here: {donationReqs.length}
-      </div>
+      </div> */}
       {/* mock data  */}
 
       <div className="rounded-lg border border-gray-200">
