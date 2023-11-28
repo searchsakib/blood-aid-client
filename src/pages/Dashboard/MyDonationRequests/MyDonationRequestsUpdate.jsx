@@ -345,7 +345,7 @@ const MyDonationRequestsUpdate = () => {
 
               <div className="form-control mt-6">
                 <button className="btn bg-[#05386B] text-white hover:text-[#05386B]  hover:bg-blue-50 hover:border-2 hover:border-[#05386B] rounded-none">
-                  Update Request Donation
+                  Update Donation Request
                 </button>
               </div>
             </form>
