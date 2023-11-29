@@ -7,7 +7,7 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 
 const MyDonationRequests = () => {
-  // const { user } = useAuth();
+  const { user } = useAuth();
 
   const [donationReqs, refetch, isLoading] = useDonationReqs();
   console.log('This is donation req', donationReqs);
@@ -118,8 +118,14 @@ const MyDonationRequests = () => {
                     </button>
                   </td>
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
-                    <p> {perDonationReq?.requester_name} </p>
-                    <p> {perDonationReq?.requester_email} </p>
+                    {perDonationReq?.status === 'inprogress' ? (
+                      <div>
+                        <p> {user?.displayName} </p>
+                        <p> {user?.email} </p>
+                      </div>
+                    ) : (
+                      'no donor yet'
+                    )}
                   </td>
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                     <Link

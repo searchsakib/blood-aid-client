@@ -133,7 +133,7 @@ const MyDonationRequestsUpdate = () => {
                   </span>
                 </label>
                 <input
-                  defaultValue={user?.displayName}
+                  defaultValue={requester_name}
                   type="text"
                   placeholder=""
                   name="requester_name"
@@ -149,7 +149,7 @@ const MyDonationRequestsUpdate = () => {
                   </span>
                 </label>
                 <input
-                  defaultValue={user?.email}
+                  defaultValue={requester_email}
                   type="email"
                   placeholder=""
                   name="requester_email"

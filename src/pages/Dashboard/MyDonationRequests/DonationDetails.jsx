@@ -1,9 +1,9 @@
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
+// import { useEffect, useState } from 'react';
+// import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../../../hooks/useAuth';
-import towns from '../../../data/towns';
+// import towns from '../../../data/towns';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const DonationDetails = () => {
@@ -37,6 +37,10 @@ const DonationDetails = () => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   // console.log('Why its not working', myDonationDetails);
 
   // for district and upazilla
@@ -48,68 +52,59 @@ const DonationDetails = () => {
   // const [disError, setDisError] = useState('');
   // const [upazilaError, setUpazilaError] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  const handleDonate = async (e) => {
-    e.preventDefault();
-    // console.log(e.currentTarget);
-    const form = new FormData(e.currentTarget);
-
-    const requester_name = form.get('requester_name');
-    const requester_email = form.get('requester_email');
-    const recipient_name = form.get('recipient_name');
-    const blood = form.get('blood');
-    const recipient_district = form.get('recipient_district');
-    const recipient_upazila = form.get('recipient_upazila');
-    const hospital_name = form.get('hospital_name');
-    const full_address = form.get('full_address');
-    const donation_date = form.get('donation_date');
-    const donation_time = form.get('donation_time');
-    const request_message = form.get('request_message');
-    // const status = 'active';
-    // const role = 'donor';
-
-    const updatedDonationReq = {
-      requester_name,
-      requester_email,
-      recipient_name,
-      blood,
-      recipient_district,
-      recipient_upazila,
-      hospital_name,
-      full_address,
-      donation_date,
-      donation_time,
-      request_message,
-      status: 'pending',
-    };
-    console.log('New User', updatedDonationReq);
-
-    //! for donation request upadate starts
-    // const res = await axiosSecure.put(
-    //   `/dashboard/my-donation-requests-update/${_id}`,
-    //   updatedDonationReq
-    // );
-    // console.log(res.data);
-    // if (res.data.modifiedCount) {
-    //   Swal.fire({
-    //     title: 'Success!',
-    //     text: 'Donation Request Updated Successfully',
-    //     icon: 'success',
-    //     confirmButtonText: 'Okay',
-    //   });
-    //   navigate('/dashboard/my-donation-requests');
-    // }
-
-    //! for donation request upadate ends
-
-    // for distric and upazilla again
-    // district ? setDisError('') : setDisError('Please choose district');
-    // upazila ? setUpazilaError('') : setUpazilaError('Please choose upazila');
-    // if (!district || !upazila) return;
-  };
+  // const handleDonate = async (e) => {
+  // e.preventDefault();
+  // console.log(e.currentTarget);
+  // const form = new FormData(e.currentTarget);
+  // const requester_name = form.get('requester_name');
+  // const requester_email = form.get('requester_email');
+  // const recipient_name = form.get('recipient_name');
+  // const blood = form.get('blood');
+  // const recipient_district = form.get('recipient_district');
+  // const recipient_upazila = form.get('recipient_upazila');
+  // const hospital_name = form.get('hospital_name');
+  // const full_address = form.get('full_address');
+  // const donation_date = form.get('donation_date');
+  // const donation_time = form.get('donation_time');
+  // const request_message = form.get('request_message');
+  // const status = 'active';
+  // const role = 'donor';
+  // const updatedDonationReq = {
+  //   requester_name,
+  //   requester_email,
+  //   recipient_name,
+  //   blood,
+  //   recipient_district,
+  //   recipient_upazila,
+  //   hospital_name,
+  //   full_address,
+  //   donation_date,
+  //   donation_time,
+  //   request_message,
+  //   status: 'pending',
+  // };
+  // console.log('New User', updatedDonationReq);
+  //! for donation request upadate starts
+  // const res = await axiosSecure.put(
+  //   `/dashboard/my-donation-requests-update/${_id}`,
+  //   updatedDonationReq
+  // );
+  // console.log(res.data);
+  // if (res.data.modifiedCount) {
+  //   Swal.fire({
+  //     title: 'Success!',
+  //     text: 'Donation Request Updated Successfully',
+  //     icon: 'success',
+  //     confirmButtonText: 'Okay',
+  //   });
+  //   navigate('/dashboard/my-donation-requests');
+  // }
+  //! for donation request upadate ends
+  // for distric and upazilla again
+  // district ? setDisError('') : setDisError('Please choose district');
+  // upazila ? setUpazilaError('') : setUpazilaError('Please choose upazila');
+  // if (!district || !upazila) return;
+  // };
 
   // for district upazilla once again
   // useEffect(() => {
@@ -282,7 +277,11 @@ const DonationDetails = () => {
 
                     <div className="form-control mt-6">
                       {status === 'inprogress' ? (
-                        <p>Inprogress Now...</p>
+                        <p>Donation inprogress...</p>
+                      ) : status === 'done' ? (
+                        <p>Donation Done</p>
+                      ) : status === 'canceled' ? (
+                        <p>Donation Canceled</p>
                       ) : (
                         <button
                           onClick={() => handleStatus(_id)}
