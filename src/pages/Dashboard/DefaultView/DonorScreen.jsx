@@ -212,7 +212,7 @@ const MyDonationRequests = () => {
           </div>
         </div>
       ) : (
-        <div className="text-center text-2xl font-medium">
+        <div className="text-center text-2xl font-medium text-sky-700">
           No Donation Request Made Yet
         </div>
       )}
@@ -224,13 +224,21 @@ const MyDonationRequests = () => {
           <Link
             to="/dashboard/my-donation-requests"
             rel="noopener noreferrer"
-            className="capitalize px-8 py-3 text-lg font-semibold rounded dark:bg-red-600 hover:bg-red-800 transition-colors duration-300 ease-in-out dark:text-white"
+            className="capitalize px-8 py-3 text-lg font-semibold rounded dark:bg-teal-700 hover:bg-teal-900 transition-colors duration-300 ease-in-out dark:text-white"
           >
             view my all request
           </Link>
         </div>
       ) : (
-        ''
+        <div className="flex items-center justify-center pt-10">
+          <Link
+            to="/dashboard/create-donation-request"
+            rel="noopener noreferrer"
+            className="capitalize px-8 py-3 text-lg font-semibold rounded dark:bg-sky-600 hover:bg-sky-800 transition-colors duration-300 ease-in-out dark:text-white"
+          >
+            create donation request
+          </Link>
+        </div>
       )}
     </div>
   );
