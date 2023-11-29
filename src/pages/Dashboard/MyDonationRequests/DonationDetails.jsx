@@ -277,11 +277,35 @@ const DonationDetails = () => {
 
                     <div className="form-control mt-6">
                       {status === 'inprogress' ? (
-                        <p>Donation inprogress...</p>
+                        <div>
+                          <button
+                            onClick={() => handleStatus(_id)}
+                            className="btn bg-[#05386B] text-white hover:text-[#05386B] hover:bg-blue-50 hover:border-2 hover:border-[#05386B] rounded-none btn-disabled"
+                          >
+                            Confirm
+                          </button>
+                          <p>Donation inprogress...</p>
+                        </div>
                       ) : status === 'done' ? (
-                        <p>Donation Done</p>
+                        <div>
+                          <button
+                            onClick={() => handleStatus(_id)}
+                            className="btn bg-[#05386B] text-white hover:text-[#05386B] hover:bg-blue-50 hover:border-2 hover:border-[#05386B] rounded-none btn-disabled"
+                          >
+                            Confirm
+                          </button>
+                          <p>Donation Done</p>
+                        </div>
                       ) : status === 'canceled' ? (
-                        <p>Donation Canceled</p>
+                        <div>
+                          <button
+                            onClick={() => handleStatus(_id)}
+                            className="btn bg-[#05386B] text-white hover:text-[#05386B] hover:bg-blue-50 hover:border-2 hover:border-[#05386B] rounded-none btn-disabled"
+                          >
+                            Confirm
+                          </button>
+                          <p>Donation Canceled</p>
+                        </div>
                       ) : (
                         <button
                           onClick={() => handleStatus(_id)}
@@ -296,7 +320,9 @@ const DonationDetails = () => {
                   <div className="modal-action">
                     <form method="dialog" className="text-center mx-auto">
                       {/* if there is a button in form, it will close the modal */}
-                      <button className="btn">Close</button>
+                      <button className="btn bg-violet-600 hover:bg-violet-800  text-white">
+                        Close
+                      </button>
                     </form>
                   </div>
                 </div>

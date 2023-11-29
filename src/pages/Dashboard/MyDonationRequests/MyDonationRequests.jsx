@@ -110,12 +110,18 @@ const MyDonationRequests = () => {
                     {perDonationReq?.donation_time}
                   </td>
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700 flex flex-col gap-3">
-                    <button className="btn btn-xs rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
-                      Done
-                    </button>
-                    <button className="btn btn-xs rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
-                      Canceled
-                    </button>
+                    {perDonationReq?.status === 'inprogress' ? (
+                      <div className="flex gap-2">
+                        <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                          Done
+                        </button>
+                        <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                          Canceled
+                        </button>
+                      </div>
+                    ) : (
+                      <p> {perDonationReq?.status} </p>
+                    )}
                   </td>
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
                     {perDonationReq?.status === 'inprogress' ? (
