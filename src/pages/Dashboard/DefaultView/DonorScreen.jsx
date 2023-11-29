@@ -20,6 +20,13 @@ const MyDonationRequests = () => {
       if (res.data.modifiedCount > 0) {
         refetch();
         // navigate('/dashboard/my-donation-requests');
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: `Blood Donation Done!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     });
   };
@@ -31,6 +38,13 @@ const MyDonationRequests = () => {
       if (res.data.modifiedCount > 0) {
         refetch();
         // navigate('/dashboard/my-donation-requests');
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: `Donation Canceled!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     });
   };
