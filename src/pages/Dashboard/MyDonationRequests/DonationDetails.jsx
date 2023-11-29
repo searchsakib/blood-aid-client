@@ -284,7 +284,9 @@ const DonationDetails = () => {
                           >
                             Confirm
                           </button>
-                          <p>Donation inprogress...</p>
+                          <p className="pt-5 font-semibold">
+                            Donation inprogress...
+                          </p>
                         </div>
                       ) : status === 'done' ? (
                         <div>
@@ -294,7 +296,7 @@ const DonationDetails = () => {
                           >
                             Confirm
                           </button>
-                          <p>Donation Done</p>
+                          <p className="pt-5 font-semibold">Donation Done!</p>
                         </div>
                       ) : status === 'canceled' ? (
                         <div>
@@ -304,7 +306,9 @@ const DonationDetails = () => {
                           >
                             Confirm
                           </button>
-                          <p>Donation Canceled</p>
+                          <p className="pt-5 font-semibold">
+                            Donation Canceled!
+                          </p>
                         </div>
                       ) : (
                         <button

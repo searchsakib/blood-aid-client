@@ -13,6 +13,28 @@ const MyDonationRequests = () => {
   console.log('This is donation req', donationReqs);
   const axiosSecure = useAxiosSecure();
 
+  //! Done Functionality
+  const handleDone = (id) => {
+    axiosSecure.patch(`/dashboard/status-done/${id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        // navigate('/dashboard/my-donation-requests');
+      }
+    });
+  };
+
+  //! Canceled Functionality
+  const handleCanceled = (id) => {
+    axiosSecure.patch(`/dashboard/status-canceled/${id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        // navigate('/dashboard/my-donation-requests');
+      }
+    });
+  };
+
   //! Delete Functionality
   const handleDelete = (id) => {
     Swal.fire({
@@ -112,25 +134,34 @@ const MyDonationRequests = () => {
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700 flex flex-col gap-3">
                     {perDonationReq?.status === 'inprogress' ? (
                       <div className="flex gap-2">
-                        <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                        <button
+                          onClick={() => handleDone(perDonationReq?._id)}
+                          className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]"
+                        >
                           Done
                         </button>
-                        <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                        <button
+                          onClick={() => handleCanceled(perDonationReq?._id)}
+                          className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]"
+                        >
                           Canceled
                         </button>
                       </div>
                     ) : (
-                      <p> {perDonationReq?.status} </p>
+                      <p className="uppercase text-sm text-center">
+                        {' '}
+                        {perDonationReq?.status}{' '}
+                      </p>
                     )}
                   </td>
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
-                    {perDonationReq?.status === 'inprogress' ? (
+                    {perDonationReq?.status === 'pending' ? (
+                      'no donor yet'
+                    ) : (
                       <div>
                         <p> {user?.displayName} </p>
                         <p> {user?.email} </p>
                       </div>
-                    ) : (
-                      'no donor yet'
                     )}
                   </td>
                   <td className="whitespace-nowrap px-4 py-2 text-gray-700">
