@@ -24,6 +24,7 @@ const MyDonationRequestsUpdate = () => {
     donation_date,
     donation_time,
     request_message,
+    status,
   } = myUpdate || {};
   console.log('Why its not working', myUpdate);
 
@@ -67,7 +68,7 @@ const MyDonationRequestsUpdate = () => {
       donation_date,
       donation_time,
       request_message,
-      status: 'pending',
+      status,
     };
     console.log('New User', updatedDonationReq);
 

@@ -57,8 +57,8 @@ const UpdateProfile = () => {
       blood,
       district,
       upazila,
-      status: 'active',
-      role: 'donor',
+      status,
+      role,
     };
     console.log('New User', updatedUserData);
 
