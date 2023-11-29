@@ -9,7 +9,6 @@ import Fundings from '../pages/Fundings/Fundings';
 import Register from '../pages/Register/Register';
 import SearchPage from '../pages/SearchPage/SearchPage';
 import Dashboard from '../layout/Dashboard';
-import AdminHome from '../pages/Dashboard/AdminHome/AdminHome';
 import DefaultView from '../pages/Dashboard/DefaultView/DefaultView';
 import Profile from '../pages/Dashboard/Profile/Profile';
 import UpdateProfile from '../pages/Dashboard/Profile/UpdateProfile';
@@ -17,6 +16,7 @@ import MyDonationRequests from '../pages/Dashboard/MyDonationRequests/MyDonation
 import CreateDonationReq from '../pages/Dashboard/CreateDonationReq/CreateDonationReq';
 import MyDonationRequestsUpdate from '../pages/Dashboard/MyDonationRequests/MyDonationRequestsUpdate';
 import DonationDetails from '../pages/Dashboard/MyDonationRequests/DonationDetails';
+import AllUsers from '../pages/Dashboard/AllUsers/AllUsers';
 
 const myRoute = createBrowserRouter([
   {
@@ -64,6 +64,7 @@ const myRoute = createBrowserRouter([
     path: '',
     element: <Dashboard></Dashboard>,
     children: [
+      //! donor (user) routes
       {
         path: 'dashboard',
         element: <DefaultView></DefaultView>,
@@ -115,8 +116,6 @@ const myRoute = createBrowserRouter([
           ),
       },
 
-      //! donor (user) routes
-
       // {
       //   path: 'cart',
       //   element: <Cart></Cart>,
@@ -132,12 +131,13 @@ const myRoute = createBrowserRouter([
 
       //! admin only routes
       {
-        path: 'admin-home',
+        path: '/dashboard/all-users',
         element: (
           // <AdminRoute></AdminRoute>
-          <AdminHome></AdminHome>
+          <AllUsers></AllUsers>
         ),
       },
+
       // {
       //   path: 'addItems',
       //   element: (

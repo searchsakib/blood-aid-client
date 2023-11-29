@@ -101,6 +101,12 @@ const Dashboard = () => {
                   Admin Profile
                 </NavLink>
               </li>
+              <li>
+                <NavLink to="/dashboard/all-users">
+                  <FaUsers></FaUsers>
+                  All Users
+                </NavLink>
+              </li>
               {/* 
               <li>
                 <NavLink to="/dashboard/manageItems">
@@ -114,12 +120,7 @@ const Dashboard = () => {
                   Manage Bookings
                 </NavLink>
               </li>
-              <li>
-                <NavLink to="/dashboard/users">
-                  <FaUsers></FaUsers>
-                  All Users
-                </NavLink>
-              </li> */}
+               */}
             </>
           ) : (
             <>
