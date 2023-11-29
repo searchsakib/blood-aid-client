@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAuth from '../../../hooks/useAuth';
 import towns from '../../../data/towns';
@@ -11,6 +11,12 @@ const CreateDonationReq = () => {
   const { createUser, updateUserProfile, user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+
+  //! fetching allUsers data
+  const allUsers = useLoaderData();
+
+  //! useState for blocing
+  const [isBlocked, setIsBlocked] = useState(false);
 
   // for district and upazilla
   const [district, setDistrict] = useState();
@@ -24,6 +30,22 @@ const CreateDonationReq = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     // console.log(e.currentTarget);
+
+    //! blocking logic
+    let blockedUser = false;
+    if (user && allUsers) {
+      blockedUser = allUsers.find(
+        (userData) =>
+          userData.email === user.email && userData.status === 'blocked'
+      );
+    }
+
+    //! Check if the user is blocked before submitting the form
+    if (blockedUser) {
+      setIsBlocked(true);
+      return; //! Prevent form submission
+    }
+
     const form = new FormData(e.currentTarget);
 
     const requester_name = form.get('requester_name');
@@ -341,9 +363,22 @@ const CreateDonationReq = () => {
               </div>
 
               <div className="form-control mt-6">
-                <button className="btn bg-[#05386B] text-white hover:text-[#05386B]  hover:bg-blue-50 hover:border-2 hover:border-[#05386B] rounded-none">
+                {/* <button className="btn bg-[#05386B] text-white hover:text-[#05386B]  hover:bg-blue-50 hover:border-2 hover:border-[#05386B] rounded-none">
                   Request Donation
+                </button> */}
+                <button
+                  type="submit"
+                  className={`btn bg-[#05386B] text-white hover:text-[#05386B]  hover:bg-blue-50 hover:border-2 hover:border-[#05386B] rounded-none ${
+                    isBlocked ? 'btn-disabled' : ''
+                  }`}
+                >
+                  {isBlocked ? 'Blocked User' : 'Request Donation'}
                 </button>
+                {isBlocked && (
+                  <p className="text-red-500 mt-2 text-center">
+                    You are blocked from creating a donation request.
+                  </p>
+                )}
               </div>
             </form>
           </div>

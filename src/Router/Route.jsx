@@ -95,6 +95,7 @@ const myRoute = createBrowserRouter([
       {
         path: '/dashboard/create-donation-request',
         element: <CreateDonationReq></CreateDonationReq>,
+        loader: () => fetch('https://blood-aid-server.vercel.app/users'),
       },
 
       {
