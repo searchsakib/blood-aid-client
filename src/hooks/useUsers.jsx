@@ -5,7 +5,7 @@ const useUsers = () => {
   const axiosSecure = useAxiosSecure();
   const {
     data: users = [],
-    refetch,
+    refetch: usersFetch,
     isLoading: isUserLoading,
   } = useQuery({
     queryKey: ['users'],
@@ -14,7 +14,7 @@ const useUsers = () => {
       return res.data;
     },
   });
-  return [users, refetch, isUserLoading];
+  return [users, usersFetch, isUserLoading];
 };
 
 export default useUsers;
