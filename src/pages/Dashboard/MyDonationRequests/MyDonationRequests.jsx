@@ -145,7 +145,7 @@ const MyDonationRequests = () => {
                   className="divide-y divide-gray-200"
                 >
                   <tr>
-                    <th>{index + 1}</th>
+                    <th>{index + 1}.</th>
                     <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                       {perDonationReq?.recipient_name}
                     </td>

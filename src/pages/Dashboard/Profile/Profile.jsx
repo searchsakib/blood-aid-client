@@ -1,6 +1,8 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import { useEffect, useState } from 'react';
+import { ImDroplet } from 'react-icons/im';
+import { SlLocationPin } from 'react-icons/sl';
 const Profile = () => {
   const { user } = useAuth();
   const usersProfile = useLoaderData();
@@ -35,9 +37,14 @@ const Profile = () => {
             <div className="flex flex-col space-y-4">
               <div>
                 <h2 className="text-2xl font-semibold">{myProfile?.name}</h2>
-                <span className="font-medium">
-                  Location: {myProfile?.upazila}, {myProfile?.district}{' '}
-                </span>
+                <div className="flex items-center">
+                  <span className="mr-1">
+                    <SlLocationPin />
+                  </span>
+                  <span className="font-medium">
+                    {myProfile?.upazila}, {myProfile?.district}{' '}
+                  </span>
+                </div>
               </div>
               <div className="space-y-1">
                 <span className="flex items-center space-x-2">
@@ -55,7 +62,9 @@ const Profile = () => {
                   <span className="font-medium">{myProfile?.email}</span>
                 </span>
                 <span className="flex items-center space-x-2">
-                  <p>Blood Group:</p>
+                  <span>
+                    <ImDroplet />
+                  </span>
                   <span className="font-medium">{myProfile?.blood}</span>
                 </span>
               </div>
