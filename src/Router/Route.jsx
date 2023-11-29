@@ -9,7 +9,6 @@ import Fundings from '../pages/Fundings/Fundings';
 import Register from '../pages/Register/Register';
 import SearchPage from '../pages/SearchPage/SearchPage';
 import Dashboard from '../layout/Dashboard';
-import DonorHome from '../pages/Dashboard/DonorHome/DonorHome';
 import AdminHome from '../pages/Dashboard/AdminHome/AdminHome';
 import DefaultView from '../pages/Dashboard/DefaultView/DefaultView';
 import Profile from '../pages/Dashboard/Profile/Profile';

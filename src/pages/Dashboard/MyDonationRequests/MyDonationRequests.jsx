@@ -9,6 +9,9 @@ import Swal from 'sweetalert2';
 const MyDonationRequests = () => {
   const { user } = useAuth();
 
+  // filter by status
+  const [filterStatus, setFilterStatus] = useState('all');
+
   const [donationReqs, refetch, isLoading] = useDonationReqs();
   console.log('This is donation req', donationReqs);
   const axiosSecure = useAxiosSecure();
@@ -74,15 +77,33 @@ const MyDonationRequests = () => {
 
   return (
     <div>
-      {/* <div className="text-3xl text-center py-5">
-        Data fetched here: {donationReqs.length}
-      </div> */}
-      {/* mock data  */}
-
+      <h2 className="text-3xl text-center font-semibold pb-5">
+        My Blood Donation Requests
+      </h2>
       <div className="rounded-lg border border-gray-200">
         <Helmet>
           <title>Blood Aid | My Donation Requests</title>
         </Helmet>
+
+        {/* Filtering options */}
+        <div className="flex items-center justify-end my-4">
+          <label htmlFor="statusFilter" className="mr-2 font-semibold">
+            Filter by Status:
+          </label>
+          <select
+            id="statusFilter"
+            className="p-2 border border-gray-300 rounded-md"
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value)}
+          >
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="inprogress">InProgress</option>
+            <option value="done">Done</option>
+            <option value="canceled">Canceled</option>
+            {/* Add more status options if needed */}
+          </select>
+        </div>
         <div className="overflow-x-auto rounded-t-lg">
           <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
             <thead className="ltr:text-left rtl:text-right">
@@ -111,88 +132,95 @@ const MyDonationRequests = () => {
               </tr>
             </thead>
 
-            {donationReqs?.map((perDonationReq, index) => (
-              <tbody
-                key={perDonationReq?._id}
-                className="divide-y divide-gray-200"
-              >
-                <tr>
-                  <th>{index + 1}</th>
-                  <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                    {perDonationReq?.recipient_name}
-                  </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
-                    <p>{perDonationReq?.recipient_upazila},</p>
-                    <p> {perDonationReq?.recipient_district} </p>
-                  </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                    {perDonationReq?.donation_date}
-                  </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                    {perDonationReq?.donation_time}
-                  </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700 flex flex-col gap-3">
-                    {perDonationReq?.status === 'inprogress' ? (
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => handleDone(perDonationReq?._id)}
-                          className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]"
-                        >
-                          Done
+            {/* Render donation requests based on the selected status */}
+
+            {donationReqs
+              ?.filter((perDonationReq) => {
+                if (filterStatus === 'all') return true;
+                return perDonationReq.status === filterStatus;
+              })
+              .map((perDonationReq, index) => (
+                <tbody
+                  key={perDonationReq?._id}
+                  className="divide-y divide-gray-200"
+                >
+                  <tr>
+                    <th>{index + 1}</th>
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                      {perDonationReq?.recipient_name}
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
+                      <p>{perDonationReq?.recipient_upazila},</p>
+                      <p> {perDonationReq?.recipient_district} </p>
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                      {perDonationReq?.donation_date}
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                      {perDonationReq?.donation_time}
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 flex flex-col gap-3">
+                      {perDonationReq?.status === 'inprogress' ? (
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => handleDone(perDonationReq?._id)}
+                            className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]"
+                          >
+                            Done
+                          </button>
+                          <button
+                            onClick={() => handleCanceled(perDonationReq?._id)}
+                            className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]"
+                          >
+                            Canceled
+                          </button>
+                        </div>
+                      ) : (
+                        <p className="uppercase text-sm text-center">
+                          {' '}
+                          {perDonationReq?.status}{' '}
+                        </p>
+                      )}
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
+                      {perDonationReq?.status === 'pending' ? (
+                        'no donor yet'
+                      ) : (
+                        <div>
+                          <p> {user?.displayName} </p>
+                          <p> {user?.email} </p>
+                        </div>
+                      )}
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                      <Link
+                        to={`/dashboard/my-donation-requests-update/${perDonationReq?._id}`}
+                      >
+                        <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                          Edit
                         </button>
-                        <button
-                          onClick={() => handleCanceled(perDonationReq?._id)}
-                          className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]"
-                        >
-                          Canceled
+                      </Link>
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                      <button
+                        onClick={() => handleDelete(perDonationReq?._id)}
+                        className="btn btn-sm rounded-none bg-[#d33] text-white hover:bg-[#ac2828]"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                      <Link
+                        to={`/dashboard/donation-details/${perDonationReq?._id}`}
+                      >
+                        <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                          View
                         </button>
-                      </div>
-                    ) : (
-                      <p className="uppercase text-sm text-center">
-                        {' '}
-                        {perDonationReq?.status}{' '}
-                      </p>
-                    )}
-                  </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
-                    {perDonationReq?.status === 'pending' ? (
-                      'no donor yet'
-                    ) : (
-                      <div>
-                        <p> {user?.displayName} </p>
-                        <p> {user?.email} </p>
-                      </div>
-                    )}
-                  </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                    <Link
-                      to={`/dashboard/my-donation-requests-update/${perDonationReq?._id}`}
-                    >
-                      <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
-                        Edit
-                      </button>
-                    </Link>
-                  </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                    <button
-                      onClick={() => handleDelete(perDonationReq?._id)}
-                      className="btn btn-sm rounded-none bg-[#d33] text-white hover:bg-[#ac2828]"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                    <Link
-                      to={`/dashboard/donation-details/${perDonationReq?._id}`}
-                    >
-                      <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
-                        View
-                      </button>
-                    </Link>
-                  </td>
-                </tr>
-              </tbody>
-            ))}
+                      </Link>
+                    </td>
+                  </tr>
+                </tbody>
+              ))}
           </table>
         </div>
 
