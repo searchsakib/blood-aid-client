@@ -99,9 +99,7 @@ const AllUsers = () => {
 
   return (
     <div>
-      <h2 className="text-3xl text-center font-semibold pb-5">
-        My Blood Donation Requests
-      </h2>
+      <h2 className="text-3xl text-center font-semibold pb-5">All Users</h2>
       {users?.length > 0 ? (
         <div className="rounded-lg border border-gray-200">
           <Helmet>

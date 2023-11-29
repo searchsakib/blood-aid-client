@@ -18,6 +18,7 @@ import MyDonationRequestsUpdate from '../pages/Dashboard/MyDonationRequests/MyDo
 import DonationDetails from '../pages/Dashboard/MyDonationRequests/DonationDetails';
 import AllUsers from '../pages/Dashboard/AllUsers/AllUsers';
 import PrivateRoute from './PrivateRoute';
+import AdminRoute from './AdminRoute';
 
 const myRoute = createBrowserRouter([
   {
@@ -162,8 +163,9 @@ const myRoute = createBrowserRouter([
       {
         path: '/dashboard/all-users',
         element: (
-          // <AdminRoute></AdminRoute>
-          <AllUsers></AllUsers>
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
         ),
       },
 
