@@ -28,7 +28,15 @@ const Dashboard = () => {
   // TODO: have to add Volunteer route
 
   // TODO: get isAdmin value from the database
-  const [isAdmin] = useAdmin();
+  const [isAdmin, isAdminLoading] = useAdmin();
+
+  if (isAdminLoading) {
+    return (
+      <div className="flex items-center justify-center m-14 lg:m-[150px]">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="drawer lg:drawer-open">
@@ -77,7 +85,12 @@ const Dashboard = () => {
           {isAdmin ? (
             <>
               <li>
-                <NavLink to="/dashboard/admin-home">
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive, isPending }) =>
+                    isPending ? 'pending' : isActive ? '' : ''
+                  }
+                >
                   <FaHome></FaHome>
                   Admin Home
                 </NavLink>
