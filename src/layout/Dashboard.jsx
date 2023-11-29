@@ -111,7 +111,12 @@ const Dashboard = () => {
           ) : (
             <>
               <li>
-                <NavLink to="/dashboard/donor-home">
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive, isPending }) =>
+                    isPending ? 'pending' : isActive ? '' : ''
+                  }
+                >
                   <FaHome></FaHome>
                   Donor Home
                 </NavLink>

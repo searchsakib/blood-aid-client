@@ -62,11 +62,11 @@ const myRoute = createBrowserRouter([
   //Dashboard Section
 
   {
-    path: 'dashboard',
+    path: '',
     element: <Dashboard></Dashboard>,
     children: [
       {
-        index: true,
+        path: 'dashboard',
         element: <DefaultView></DefaultView>,
       },
 
@@ -116,10 +116,7 @@ const myRoute = createBrowserRouter([
       },
 
       //! donor (user) routes
-      {
-        path: 'donor-home',
-        element: <DonorHome></DonorHome>,
-      },
+
       // {
       //   path: 'cart',
       //   element: <Cart></Cart>,
