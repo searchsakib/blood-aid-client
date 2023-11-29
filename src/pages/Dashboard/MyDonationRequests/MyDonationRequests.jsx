@@ -82,7 +82,9 @@ const MyDonationRequests = () => {
 
   if (isLoading)
     return (
-      <span className="loading loading-bars text-red-500 loading-lg"></span>
+      <div className="flex items-center justify-center m-14 lg:m-[150px]">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
     );
 
   // const myDonationReqs = useLoaderData();

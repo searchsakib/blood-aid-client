@@ -15,7 +15,7 @@ const AdminScreen = () => {
   if (isUserLoading) {
     return (
       <div className="flex items-center justify-center m-14 lg:m-[150px]">
-        <span className="loading loading-bars loading-lg text-red-500"></span>
+        <span className="loading loading-bars loading-lg"></span>
       </div>
     );
   }
