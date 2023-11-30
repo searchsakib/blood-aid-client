@@ -20,6 +20,7 @@ import AllUsers from '../pages/Dashboard/AllUsers/AllUsers';
 import PrivateRoute from './PrivateRoute';
 import AdminRoute from './AdminRoute';
 import AllDonationRequest from '../pages/Dashboard/AllDonationRequest/AllDonationRequest';
+import ContentManagement from '../pages/Dashboard/ContentManagement/ContentManagement';
 
 const myRoute = createBrowserRouter([
   {
@@ -178,6 +179,16 @@ const myRoute = createBrowserRouter([
         element: (
           <AdminRoute>
             <AllDonationRequest></AllDonationRequest>
+          </AdminRoute>
+        ),
+      },
+
+      // content management page (admin)
+      {
+        path: '/dashboard/content-management',
+        element: (
+          <AdminRoute>
+            <ContentManagement></ContentManagement>
           </AdminRoute>
         ),
       },

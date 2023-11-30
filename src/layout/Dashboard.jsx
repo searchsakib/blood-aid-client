@@ -17,6 +17,7 @@ import {
 } from 'react-icons/fa';
 import { IoCreate } from 'react-icons/io5';
 import { BiSolidDonateBlood } from 'react-icons/bi';
+import { MdEditDocument } from 'react-icons/md';
 
 // import useCart from '../hooks/useCart';
 import useAdmin from '../hooks/useAdmin';
@@ -114,20 +115,12 @@ const Dashboard = () => {
                   All Blood Donation Request
                 </NavLink>
               </li>
-              {/* 
               <li>
-                <NavLink to="/dashboard/manageItems">
-                  <FaList></FaList>
-                  Manage Items
+                <NavLink to="/dashboard/content-management">
+                  <MdEditDocument />
+                  Content Management
                 </NavLink>
               </li>
-              <li>
-                <NavLink to="/dashboard/bookings">
-                  <FaBook></FaBook>
-                  Manage Bookings
-                </NavLink>
-              </li>
-               */}
             </>
           ) : (
             <>
