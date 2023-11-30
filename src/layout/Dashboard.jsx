@@ -165,6 +165,12 @@ const Dashboard = () => {
                   Create Donation Requests
                 </NavLink>
               </li>
+              <li>
+                <NavLink to="/dashboard/content-management">
+                  <MdEditDocument />
+                  Content Management
+                </NavLink>
+              </li>
             </>
           ) : (
             // Donor/User route

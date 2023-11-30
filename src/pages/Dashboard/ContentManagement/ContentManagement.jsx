@@ -5,12 +5,16 @@ import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
+import useVolunteer from '../../../hooks/useVolunteer';
 
 const ContentManagement = () => {
   const { user } = useAuth();
 
   // filter by status
   const [filterStatus, setFilterStatus] = useState('all');
+
+  //? blocking vlunteer from publish and blog
+  const [isVolunteer, isVolunteerLoading] = useVolunteer();
 
   const [allBlogs, allBlogsRefetch, isAllBlogsLoading] = useAllBlog();
   console.log('This all blogs data', allBlogs);
@@ -148,31 +152,49 @@ const ContentManagement = () => {
                     <div className="">
                       {perBlog?.status === 'draft' ? (
                         <div className="flex gap-2">
-                          <button
-                            onClick={() => handlePublish(perBlog?._id)}
-                            className="btn btn-md rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]"
-                          >
-                            Publish
-                          </button>
+                          {isVolunteer ? (
+                            <button className="btn btn-md rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978] btn-disabled">
+                              Publish
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => handlePublish(perBlog?._id)}
+                              className="btn btn-md rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]"
+                            >
+                              Publish
+                            </button>
+                          )}
                         </div>
                       ) : (
                         <div>
-                          <button
-                            onClick={() => handleUnpublish(perBlog?._id)}
-                            className="btn btn-md rounded-none bg-[#166282] text-white hover:bg-[#1b4978]"
-                          >
-                            Unpublish
-                          </button>
+                          {isVolunteer ? (
+                            <button className="btn btn-md rounded-none bg-[#166282] text-white hover:bg-[#1b4978] btn-disabled">
+                              Unpublish
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => handleUnpublish(perBlog?._id)}
+                              className="btn btn-md rounded-none bg-[#166282] text-white hover:bg-[#1b4978]"
+                            >
+                              Unpublish
+                            </button>
+                          )}
                         </div>
                       )}
                     </div>
                     <div>
-                      <button
-                        onClick={() => handleDeleteBlog(perBlog?._id)}
-                        className="btn btn-md rounded-none bg-[#d33] text-white hover:bg-[#ac2828]"
-                      >
-                        Delete
-                      </button>
+                      {isVolunteer ? (
+                        <button className="btn btn-md rounded-none bg-[#d33] text-white hover:bg-[#ac2828] btn-disabled">
+                          Delete
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleDeleteBlog(perBlog?._id)}
+                          className="btn btn-md rounded-none bg-[#d33] text-white hover:bg-[#ac2828]"
+                        >
+                          Delete
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
