@@ -39,6 +39,11 @@ const AddBlog = () => {
       status,
     };
     console.log('New User', blogData);
+
+    //! axios post
+    // axiosSecure
+    // .post('/users', registeredUserData)
+    // .then((res) => console.log(res.data));
   };
 
   return (
