@@ -41,9 +41,17 @@ const AddBlog = () => {
     console.log('New User', blogData);
 
     //! axios post
-    // axiosSecure
-    // .post('/users', registeredUserData)
-    // .then((res) => console.log(res.data));
+    const res = await axiosSecure.post('/add-blog', blogData);
+    console.log(res.data);
+    if (res.data.insertedId) {
+      Swal.fire({
+        title: 'Success!',
+        text: 'Blog Added Successfully',
+        icon: 'success',
+        confirmButtonText: 'Okay',
+      });
+      // navigate('/dashboard/my-donation-requests');
+    }
   };
 
   return (
