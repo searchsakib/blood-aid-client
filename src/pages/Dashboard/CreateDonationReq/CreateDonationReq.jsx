@@ -90,9 +90,9 @@ const CreateDonationReq = () => {
         icon: 'success',
         confirmButtonText: 'Okay',
       });
-      navigate('/dashboard/my-donation-requests');
+      // navigate('/dashboard/my-donation-requests');
     }
-    form.reset();
+    // form.reset();
 
     // for distric and upazilla again
     district ? setDisError('') : setDisError('Please choose district');
@@ -125,6 +125,7 @@ const CreateDonationReq = () => {
     //     console.error(error);
     //     setRegError(error.message);
     //   });
+    e.target.reset();
   };
 
   // for district upazilla once again
