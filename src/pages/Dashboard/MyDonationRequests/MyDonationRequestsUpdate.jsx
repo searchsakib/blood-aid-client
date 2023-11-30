@@ -85,7 +85,7 @@ const MyDonationRequestsUpdate = () => {
         icon: 'success',
         confirmButtonText: 'Okay',
       });
-      navigate('/dashboard/my-donation-requests');
+      // navigate('/dashboard/my-donation-requests');
     }
 
     //! for donation request upadate ends

@@ -24,7 +24,7 @@ const AdminScreen = () => {
     <div>
       <div>
         <div className="text-3xl text-center pb-10">
-          Welcome 🎉{' '}
+          Welcome Admin 🎉{' '}
           <span className="font-semibold text-red-500">
             {user?.displayName}
           </span>

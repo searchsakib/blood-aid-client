@@ -19,6 +19,7 @@ import DonationDetails from '../pages/Dashboard/MyDonationRequests/DonationDetai
 import AllUsers from '../pages/Dashboard/AllUsers/AllUsers';
 import PrivateRoute from './PrivateRoute';
 import AdminRoute from './AdminRoute';
+import AllDonationRequest from '../pages/Dashboard/AllDonationRequest/AllDonationRequest';
 
 const myRoute = createBrowserRouter([
   {
@@ -160,11 +161,23 @@ const myRoute = createBrowserRouter([
       // },
 
       //! admin only routes
+
+      //all users (admin)
       {
         path: '/dashboard/all-users',
         element: (
           <AdminRoute>
             <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
+
+      // all donation reqs (admin)
+      {
+        path: '/dashboard/all-blood-donation-request',
+        element: (
+          <AdminRoute>
+            <AllDonationRequest></AllDonationRequest>
           </AdminRoute>
         ),
       },

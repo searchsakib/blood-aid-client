@@ -1,6 +1,6 @@
 import { useLoaderData, useNavigate } from 'react-router-dom';
 // import { useEffect, useState } from 'react';
-// import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../../../hooks/useAuth';
 // import towns from '../../../data/towns';
@@ -32,7 +32,14 @@ const DonationDetails = () => {
     axiosSecure.patch(`/dashboard/status/${id}`).then((res) => {
       console.log(res.data);
       if (res.data.modifiedCount > 0) {
-        navigate('/dashboard/my-donation-requests');
+        // navigate('/dashboard/my-donation-requests');
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: `Confirmed!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     });
   };
