@@ -161,25 +161,6 @@ const Dashboard = () => {
                   Create Donation Requests Page
                 </NavLink>
               </li>
-              {/*
-              <li>
-                <NavLink to="/dashboard/cart">
-                  <FaShoppingCart></FaShoppingCart>
-                  My Cart ({cart.length})
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/dashboard/review">
-                  <FaAd></FaAd>
-                  Add a Review
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/dashboard/paymentHistory">
-                  <FaList></FaList>
-                  Real Payment History
-                </NavLink>
-              </li> */}
             </>
           )}
           {/* shared nav links */}
@@ -190,18 +171,6 @@ const Dashboard = () => {
               Home
             </NavLink>
           </li>
-          {/* <li>
-            <NavLink to="/order/salad">
-              <FaSearch></FaSearch>
-              Menu
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/order/contact">
-              <FaEnvelope></FaEnvelope>
-              Contact
-            </NavLink>
-          </li> */}
         </ul>
       </div>
     </div>
