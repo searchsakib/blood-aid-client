@@ -21,6 +21,7 @@ import PrivateRoute from './PrivateRoute';
 import AdminRoute from './AdminRoute';
 import AllDonationRequest from '../pages/Dashboard/AllDonationRequest/AllDonationRequest';
 import ContentManagement from '../pages/Dashboard/ContentManagement/ContentManagement';
+import AddBlog from '../pages/Dashboard/ContentManagement/AddBlog';
 
 const myRoute = createBrowserRouter([
   {
@@ -176,19 +177,21 @@ const myRoute = createBrowserRouter([
       // all donation reqs (admin)
       {
         path: '/dashboard/all-blood-donation-request',
-        element: (
-          <AdminRoute>
-            <AllDonationRequest></AllDonationRequest>
-          </AdminRoute>
-        ),
+        element: <AllDonationRequest></AllDonationRequest>,
       },
 
       // content management page (admin)
       {
         path: '/dashboard/content-management',
+        element: <ContentManagement></ContentManagement>,
+      },
+
+      // add blog page (admin)
+      {
+        path: '/dashboard/content-management/add-blog',
         element: (
           <AdminRoute>
-            <ContentManagement></ContentManagement>
+            <AddBlog></AddBlog>
           </AdminRoute>
         ),
       },
