@@ -5,9 +5,13 @@ import Swal from 'sweetalert2';
 import useAuth from '../../../hooks/useAuth';
 import useAllDonatonReqs from '../../../hooks/useAllDonatonReqs';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import useVolunteer from '../../../hooks/useVolunteer';
 
 const AllDonationRequest = () => {
   const { user } = useAuth();
+
+  //? blocking vlunteer
+  const [isVolunteer, isVolunteerLoading] = useVolunteer();
 
   // filter by status
   const [filterStatus, setFilterStatus] = useState('all');
@@ -208,32 +212,58 @@ const AllDonationRequest = () => {
                           </div>
                         )}
                       </td>
-                      <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                        <Link
-                          to={`/dashboard/my-donation-requests-update/${perDonationReq?._id}`}
-                        >
-                          <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
-                            Edit
-                          </button>
-                        </Link>
-                      </td>
-                      <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                        <button
-                          onClick={() => handleDelete(perDonationReq?._id)}
-                          className="btn btn-sm rounded-none bg-[#d33] text-white hover:bg-[#ac2828]"
-                        >
-                          Delete
-                        </button>
-                      </td>
-                      <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                        <Link
-                          to={`/dashboard/donation-details/${perDonationReq?._id}`}
-                        >
-                          <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
-                            View
-                          </button>
-                        </Link>
-                      </td>
+                      {isVolunteer ? (
+                        <>
+                          <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                            <Link>
+                              <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978] btn-disabled">
+                                Edit
+                              </button>
+                            </Link>
+                          </td>
+                          <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                            <button className="btn btn-sm rounded-none bg-[#d33] text-white hover:bg-[#ac2828] btn-disabled">
+                              Delete
+                            </button>
+                          </td>
+                          <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                            <Link>
+                              <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978] btn-disabled">
+                                View
+                              </button>
+                            </Link>
+                          </td>
+                        </>
+                      ) : (
+                        <>
+                          <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                            <Link
+                              to={`/dashboard/my-donation-requests-update/${perDonationReq?._id}`}
+                            >
+                              <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                                Edit
+                              </button>
+                            </Link>
+                          </td>
+                          <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                            <button
+                              onClick={() => handleDelete(perDonationReq?._id)}
+                              className="btn btn-sm rounded-none bg-[#d33] text-white hover:bg-[#ac2828]"
+                            >
+                              Delete
+                            </button>
+                          </td>
+                          <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                            <Link
+                              to={`/dashboard/donation-details/${perDonationReq?._id}`}
+                            >
+                              <button className="btn btn-sm rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]">
+                                View
+                              </button>
+                            </Link>
+                          </td>
+                        </>
+                      )}
                     </tr>
                   </tbody>
                 ))}
