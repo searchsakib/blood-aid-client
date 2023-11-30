@@ -4,6 +4,7 @@ import useAllBlog from '../../../hooks/useAllBlog';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 const ContentManagement = () => {
   const { user } = useAuth();
@@ -14,6 +15,66 @@ const ContentManagement = () => {
   const [allBlogs, allBlogsRefetch, isAllBlogsLoading] = useAllBlog();
   console.log('This all blogs data', allBlogs);
   const axiosSecure = useAxiosSecure();
+
+  //! Blog Unpublish Functionality
+  const handleUnpublish = (id) => {
+    axiosSecure.patch(`/dashboard/admin/unpublish/${id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        allBlogsRefetch();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: `Blog is Unpublished!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
+
+  //! Blog Unpublish Functionality
+  const handlePublish = (id) => {
+    axiosSecure.patch(`/dashboard/admin/publish/${id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        allBlogsRefetch();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: `Blog is Published!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
+
+  //! Delete Blog Functionality
+  const handleDeleteBlog = (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/dashboard/delete-blog/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            allBlogsRefetch();
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Blog has been deleted.',
+              icon: 'success',
+            });
+          }
+        });
+      }
+    });
+  };
 
   if (isAllBlogsLoading)
     return (
@@ -27,6 +88,16 @@ const ContentManagement = () => {
       <Helmet>
         <title>Blood Aid | Content Management</title>
       </Helmet>
+
+      <div className="flex items-center justify-end">
+        <Link
+          to="/dashboard/content-management/add-blog"
+          rel="noopener noreferrer"
+          className="capitalize px-8 py-3 text-lg font-semibold rounded dark:bg-teal-600 hover:bg-teal-800 transition-colors duration-300 ease-in-out dark:text-white my-5"
+        >
+          Add Blog
+        </Link>
+      </div>
 
       {/* Filtering options starts */}
       <div className="flex items-center justify-end my-4">
@@ -47,15 +118,6 @@ const ContentManagement = () => {
       </div>
       {/* Filtering options ends */}
 
-      <div className="flex items-center justify-end">
-        <Link
-          to="/dashboard/content-management/add-blog"
-          rel="noopener noreferrer"
-          className="capitalize px-8 py-3 text-lg font-semibold rounded dark:bg-teal-600 hover:bg-teal-800 transition-colors duration-300 ease-in-out dark:text-white my-5"
-        >
-          Add Blog
-        </Link>
-      </div>
       <h2 className="text-3xl capitalize text-center py-5 font-medium">
         content management
       </h2>
@@ -84,10 +146,34 @@ const ContentManagement = () => {
 
                   <div className="card-actions items-center justify-evenly">
                     <div className="">
-                      <button className="btn btn-primary">Publish</button>
-                      <button className="btn btn-primary">Publish</button>
+                      {perBlog?.status === 'draft' ? (
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => handlePublish(perBlog?._id)}
+                            className="btn btn-md rounded-none bg-[#2161a2] text-white hover:bg-[#1b4978]"
+                          >
+                            Publish
+                          </button>
+                        </div>
+                      ) : (
+                        <div>
+                          <button
+                            onClick={() => handleUnpublish(perBlog?._id)}
+                            className="btn btn-md rounded-none bg-[#166282] text-white hover:bg-[#1b4978]"
+                          >
+                            Unpublish
+                          </button>
+                        </div>
+                      )}
                     </div>
-                    <button className="btn btn-primary">Delete</button>
+                    <div>
+                      <button
+                        onClick={() => handleDeleteBlog(perBlog?._id)}
+                        className="btn btn-md rounded-none bg-[#d33] text-white hover:bg-[#ac2828]"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
