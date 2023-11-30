@@ -193,47 +193,9 @@ const myRoute = createBrowserRouter([
       // add blog page (admin)
       {
         path: '/dashboard/content-management/add-blog',
-        element: (
-          <AdminRoute>
-            <AddBlog></AddBlog>
-          </AdminRoute>
-        ),
+        element: <AddBlog></AddBlog>,
       },
 
-      // {
-      //   path: 'addItems',
-      //   element: (
-      //     <AdminRoute>
-      //       <AddItems></AddItems>
-      //     </AdminRoute>
-      //   ),
-      // },
-      // {
-      //   path: 'manageItems',
-      //   element: (
-      // <AdminRoute>
-      //   <ManageItems></ManageItems>
-      // </AdminRoute>,
-      //   ),
-      // },
-      // {
-      //   path: 'updateItem/:id',
-      //   element: (
-      //     <AdminRoute>
-      //       <UpdateItem></UpdateItem>
-      //     </AdminRoute>
-      //   ),
-      //   loader: ({ params }) =>
-      //     fetch(`http://localhost:5000/menu/${params.id}`),
-      // },
-      // {
-      //   path: 'users',
-      //   element: (
-      //     <AdminRoute>
-      //       <AllUsers></AllUsers>
-      //     </AdminRoute>
-      //   ),
-      // },
       //! volunteer only routes
     ],
   },
