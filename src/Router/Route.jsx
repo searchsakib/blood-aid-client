@@ -45,7 +45,11 @@ const myRoute = createBrowserRouter([
       },
       {
         path: '/fundings',
-        element: <Fundings></Fundings>,
+        element: (
+          <PrivateRoute>
+            <Fundings></Fundings>
+          </PrivateRoute>
+        ),
       },
       {
         path: '/register',
