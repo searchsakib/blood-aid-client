@@ -116,7 +116,7 @@ const Dashboard = () => {
               <li>
                 <NavLink to="/dashboard/create-donation-request">
                   <IoCreate />
-                  Create Donation Requests Page
+                  Create Donation Requests
                 </NavLink>
               </li>
 
@@ -135,7 +135,31 @@ const Dashboard = () => {
             </>
           ) : isVolunteer ? (
             // Volunteer Routes
-            <>{/* Volunteer Route Links */}</>
+            <>
+              <li>
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive, isPending }) =>
+                    isPending ? 'pending' : isActive ? '' : ''
+                  }
+                >
+                  <FaHome></FaHome>
+                  Volunteer Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/profile">
+                  <FaUser></FaUser>
+                  Volunteer Profile
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/create-donation-request">
+                  <IoCreate />
+                  Create Donation Requests
+                </NavLink>
+              </li>
+            </>
           ) : (
             // Donor/User route
             <>
@@ -159,13 +183,13 @@ const Dashboard = () => {
               <li>
                 <NavLink to="/dashboard/my-donation-requests">
                   <FaList></FaList>
-                  My Donation Requests Page
+                  My Donation Requests
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/dashboard/create-donation-request">
                   <IoCreate />
-                  Create Donation Requests Page
+                  Create Donation Requests
                 </NavLink>
               </li>
             </>
