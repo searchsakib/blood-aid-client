@@ -5,12 +5,18 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
-// import { imageUpload } from '../../api/utils';
+import { useRef } from 'react';
+import JoditEditor from 'jodit-react';
+import { imageUpload } from '../../../api/utils';
 
 const AddBlog = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const editor = useRef(null); // Create a ref for the Jodit editor
+
+  const [content, setContent] = useState(''); // State to manage the content for Jodit editor
+  const [contentError, setContentError] = useState('');
 
   const handleAddBlog = async (e) => {
     e.preventDefault();
@@ -18,27 +24,29 @@ const AddBlog = () => {
     const form = new FormData(e.currentTarget);
     const myForm = e.target;
 
-    const name = form.get('name');
-
-    // const image = form.get('image');
-    // const image = e.currentTarget.querySelector('[name="image"]').files[0];
-
     //photo upload
     const photoData = myForm.photo.files[0];
     const fetchedPhoto = await imageUpload(photoData);
     const photo = fetchedPhoto?.data?.display_url;
 
     const title = form.get('title');
-    const content = form.get('content');
     const status = 'draft';
+
+    const editorContent = editor.current.value.trim();
+    if (!editorContent) {
+      setContentError('Content cannot be empty');
+      return;
+    } else {
+      setContentError(''); // Reset the error message if content is not empty
+    }
 
     const blogData = {
       title,
       photo,
-      content,
+      content: editor.current.value, // Get content from the Jodit editor using ref
       status,
     };
-    console.log('New User', blogData);
+    console.log('My Blog', blogData);
 
     //! axios post
     const res = await axiosSecure.post('/add-blog', blogData);
@@ -52,11 +60,18 @@ const AddBlog = () => {
       });
       // navigate('/dashboard/my-donation-requests');
     }
+    e.target.reset();
+    setContent('');
+  };
+
+  // Function to handle content change in Jodit editor
+  const handleContentChange = (value) => {
+    setContent(value);
   };
 
   return (
     <div className="bg-gray-100">
-      <div className="max-w-screen-xl mx-auto px-5 md:px-6 2xl:px-0">
+      <div className="max-w-screen-xl mx-auto px-5">
         <Helmet>
           <title>Blood Aid | Add Blog</title>
         </Helmet>
@@ -100,19 +115,22 @@ const AddBlog = () => {
                   required
                 />
               </div>
+
+              {/* Jodit React Editor */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text font-medium text-base">
                     Content
                   </span>
                 </label>
-                <input
-                  type="text"
-                  placeholder="Content"
-                  name="content"
-                  className="input input-bordered rounded-none"
-                  required
+                <JoditEditor
+                  ref={editor}
+                  value={content}
+                  onChange={handleContentChange}
                 />
+                {contentError && (
+                  <p className="text-red-500 mt-2">{contentError}</p>
+                )}
               </div>
 
               <div className="form-control mt-6">
