@@ -23,6 +23,7 @@ import { MdEditDocument } from 'react-icons/md';
 import useAdmin from '../hooks/useAdmin';
 import { NavLink, Outlet } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import useVolunteer from '../hooks/useVolunteer';
 
 const Dashboard = () => {
   // const [cart] = useCart();
@@ -31,6 +32,7 @@ const Dashboard = () => {
 
   // TODO: get isAdmin value from the database
   const [isAdmin, isAdminLoading] = useAdmin();
+  const [isVolunteer, isVolunteerLoading] = useVolunteer();
 
   if (isAdminLoading) {
     return (
@@ -84,7 +86,8 @@ const Dashboard = () => {
           {/* Sidebar content here */}
           {/* dashboard side bar */}
 
-          {isAdmin ? (
+          {isAdmin && !isVolunteer ? (
+            // Admin Routes
             <>
               <li>
                 <NavLink
@@ -130,7 +133,11 @@ const Dashboard = () => {
                 </NavLink>
               </li>
             </>
+          ) : isVolunteer ? (
+            // Volunteer Routes
+            <>{/* Volunteer Route Links */}</>
           ) : (
+            // Donor/User route
             <>
               <li>
                 <NavLink
