@@ -84,7 +84,7 @@ const ContentManagement = () => {
     );
 
   return (
-    <div className="max-w-screen-xl mx-auto px-5">
+    <div className="max-w-screen-lg mx-auto px-5">
       <Helmet>
         <title>Blood Aid | Content Management</title>
       </Helmet>
