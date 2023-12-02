@@ -15,8 +15,17 @@ const UpdateProfile = () => {
   const myProfile = useLoaderData();
   console.log('this is hehehehhe', myProfile);
 
-  const { _id, name, photo, email, blood, district, upazila, status, role } =
-    myProfile || {};
+  const {
+    _id,
+    name,
+    photo: oldAvatar,
+    email,
+    blood,
+    district,
+    upazila,
+    status,
+    role,
+  } = myProfile || {};
 
   // for district and upazilla
   const [dis, setDis] = useState();
@@ -40,8 +49,11 @@ const UpdateProfile = () => {
 
     //photo upload
     const photoData = myForm.photo.files[0];
-    const fetchedPhoto = await imageUpload(photoData);
-    const photo = fetchedPhoto?.data?.display_url;
+    let photo = oldAvatar;
+    if (photoData) {
+      const fetchedPhoto = await imageUpload(photoData);
+      photo = fetchedPhoto?.data?.display_url;
+    }
 
     const email = form.email.value;
     const blood = form.blood.value;
@@ -76,7 +88,7 @@ const UpdateProfile = () => {
         confirmButtonText: 'Okay',
       });
       navigate('/dashboard/profile');
-      updateUserProfile(name, fetchedPhoto?.data?.display_url)
+      updateUserProfile(name, photo)
         .then((res) => {
           console.log('profile updated', res);
         })
@@ -136,6 +148,11 @@ const UpdateProfile = () => {
                 />
               </div>
               <div className="grid">
+                <div className="avatar pt-2">
+                  <div className="w-16 rounded-full">
+                    <img src={oldAvatar} alt="Tailwind-CSS-Avatar-component" />
+                  </div>
+                </div>
                 <label className="label">
                   <span className="label-text font-medium text-base">
                     Update Avatar
@@ -143,7 +160,6 @@ const UpdateProfile = () => {
                 </label>
 
                 <input
-                  required
                   type="file"
                   id="photo"
                   name="photo"
