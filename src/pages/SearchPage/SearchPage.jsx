@@ -16,6 +16,7 @@ const SearchPage = () => {
       setUpazilas(towns[district] || []);
     }
   }, [district]);
+  console.log(towns[district]);
 
   return (
     <div className="max-w-screen-lg mx-auto min-h-[80vh]">
@@ -23,7 +24,7 @@ const SearchPage = () => {
         <title>Blood Aid | Search Page</title>
       </Helmet>
       <h2 className="text-3xl py-10 font-semibold text-center">Search</h2>
-      <form onSubmit={handleSubmit} action="">
+      <form onSubmit={handleSubmit} className="" action="">
         <div>
           <label htmlFor="" className="block p-3">
             Blood Group
@@ -82,6 +83,9 @@ const SearchPage = () => {
             })}
           </select>
         </div>
+        <button className="btn m-5  bg-[#05386B] text-white hover:text-[#05386B]  hover:bg-blue-50 hover:border-2 hover:border-[#05386B] rounded-none">
+          Search Donor
+        </button>
       </form>
     </div>
   );
