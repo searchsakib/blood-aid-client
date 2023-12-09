@@ -1,14 +1,40 @@
 import { Helmet } from 'react-helmet-async';
 import towns from '../../data/towns';
 import { useEffect, useState } from 'react';
+import useUsers from '../../hooks/useUsers';
 
 const SearchPage = () => {
   const [district, setDistrict] = useState();
   const [upazila, setUpazila] = useState();
   const [upazilas, setUpazilas] = useState([]);
+  const [matchedUser, setMatchedUser] = useState([]);
+
+  // fetching all users data
+  const [users, usersFetch, isUserLoading] = useUsers();
+  console.log(users[0]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const form = new FormData(e.currentTarget);
+    const blood = form.get('blood');
+    const district = form.get('district');
+    const upazila = form.get('upazila');
+
+    const filteredUser = users.filter(
+      (singleUser) =>
+        singleUser.blood === blood &&
+        singleUser.district === district &&
+        singleUser.upazila === upazila
+    );
+
+    if (filteredUser.length > 0) {
+      console.log('We are matched');
+      setMatchedUser(filteredUser);
+    } else {
+      setMatchedUser('');
+      console.log('Not matched');
+    }
   };
 
   useEffect(() => {
@@ -16,7 +42,7 @@ const SearchPage = () => {
       setUpazilas(towns[district] || []);
     }
   }, [district]);
-  console.log(towns[district]);
+  // console.log(towns[district]);
 
   return (
     <div className="max-w-screen-lg mx-auto min-h-[80vh]">
@@ -30,7 +56,7 @@ const SearchPage = () => {
             <label htmlFor="" className="block p-3">
               Blood Group
             </label>
-            <select name="" id="" className="mx-3 px-3 outline outline-2">
+            <select name="blood" id="" className="mx-3 px-3 outline outline-2">
               <option value="">Select Blood Group</option>
               <option value="A+">A+</option>
               <option value="A-">A-</option>
@@ -49,7 +75,7 @@ const SearchPage = () => {
             </label>
             <select
               onChange={(e) => setDistrict(e.target.value)}
-              name=""
+              name="district"
               id=""
               className="mx-3 px-3 outline outline-2"
             >
@@ -69,7 +95,7 @@ const SearchPage = () => {
               Upazilas
             </label>
             <select
-              name=""
+              name="upazila"
               id=""
               className="mx-3 px-3 outline outline-2"
               onChange={(e) => setUpazila(e.target.value)}
@@ -91,6 +117,7 @@ const SearchPage = () => {
 
         <div>
           <h2>This is where the magic happens</h2>
+          {matchedUser.length > 0 && <h2>Haha</h2>}
         </div>
       </div>
     </div>
