@@ -28,13 +28,13 @@ const SearchPage = () => {
         singleUser.role === 'donor'
     );
 
-    // if (filteredUser.length > 0) {
-    //   console.log('We are matched');
-    //   setMatchedUsers(filteredUser);
-    // } else {
-    //   setMatchedUsers('');
-    //   console.log('Not matched');
-    // }
+    if (filteredUser.length > 0) {
+      console.log('We are matched');
+      setMatchedUsers(filteredUser);
+    } else {
+      setMatchedUsers('');
+      console.log('Not matched');
+    }
   };
 
   useEffect(() => {
@@ -120,7 +120,7 @@ const SearchPage = () => {
           <h2 className="pb-5 text-3xl font-medium text-red-500 uppercase text-center">
             Donors
           </h2>
-          {matchedUsers?.length > 0 && (
+          {matchedUsers?.length > 0 ? (
             <div>
               {matchedUsers?.map((matchedUser) => (
                 <div
@@ -139,6 +139,10 @@ const SearchPage = () => {
                   </div>
                 </div>
               ))}
+            </div>
+          ) : (
+            <div>
+              <h2>No donors found</h2>
             </div>
           )}
         </div>
