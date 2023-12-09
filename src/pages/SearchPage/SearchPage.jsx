@@ -7,11 +7,10 @@ const SearchPage = () => {
   const [district, setDistrict] = useState();
   const [upazila, setUpazila] = useState();
   const [upazilas, setUpazilas] = useState([]);
-  const [matchedUser, setMatchedUser] = useState([]);
+  const [matchedUsers, setMatchedUsers] = useState([]);
 
   // fetching all users data
   const [users, usersFetch, isUserLoading] = useUsers();
-  console.log(users[0]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,16 +24,17 @@ const SearchPage = () => {
       (singleUser) =>
         singleUser.blood === blood &&
         singleUser.district === district &&
-        singleUser.upazila === upazila
+        singleUser.upazila === upazila &&
+        singleUser.role === 'donor'
     );
 
-    if (filteredUser.length > 0) {
-      console.log('We are matched');
-      setMatchedUser(filteredUser);
-    } else {
-      setMatchedUser('');
-      console.log('Not matched');
-    }
+    // if (filteredUser.length > 0) {
+    //   console.log('We are matched');
+    //   setMatchedUsers(filteredUser);
+    // } else {
+    //   setMatchedUsers('');
+    //   console.log('Not matched');
+    // }
   };
 
   useEffect(() => {
@@ -115,9 +115,32 @@ const SearchPage = () => {
           </button>
         </form>
 
+        {/* Showing the filtered user who's role is also donor */}
         <div>
-          <h2>This is where the magic happens</h2>
-          {matchedUser.length > 0 && <h2>Haha</h2>}
+          <h2 className="pb-5 text-3xl font-medium text-red-500 uppercase text-center">
+            Donors
+          </h2>
+          {matchedUsers?.length > 0 && (
+            <div>
+              {matchedUsers?.map((matchedUser) => (
+                <div
+                  key={matchedUser._id}
+                  className="bg-purple-800 p-5 rounded m-5 shadow-xl"
+                >
+                  <div className="text-xl text-white font-medium">
+                    <p>
+                      Donor Name:{' '}
+                      <span className="ml-1">{matchedUser.name}</span>
+                    </p>
+                    <p>
+                      Donor Email:{' '}
+                      <span className="ml-1">{matchedUser.email}</span>
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
