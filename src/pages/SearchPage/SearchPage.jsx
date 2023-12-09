@@ -50,7 +50,7 @@ const SearchPage = () => {
         <title>Blood Aid | Search Page</title>
       </Helmet>
       <h2 className="text-3xl py-10 font-semibold text-center">Search</h2>
-      <div className="flex gap-10  justify-center">
+      <div className="flex gap-24 flex-col md:flex-row justify-center px-5">
         <form onSubmit={handleSubmit} className="" action="">
           <div>
             <label htmlFor="" className="block p-3">
@@ -125,7 +125,7 @@ const SearchPage = () => {
               {matchedUsers?.map((matchedUser) => (
                 <div
                   key={matchedUser._id}
-                  className="bg-purple-800 p-5 rounded m-5 shadow-xl"
+                  className="bg-purple-800 p-5 rounded my-5 mx-1 shadow-xl"
                 >
                   <div className="text-xl text-white font-medium">
                     <p>
@@ -141,7 +141,7 @@ const SearchPage = () => {
               ))}
             </div>
           ) : (
-            <div>
+            <div className="text-center text-2xl font-medium">
               <h2>No donors found</h2>
             </div>
           )}
